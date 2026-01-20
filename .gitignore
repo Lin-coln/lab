@@ -130,8 +130,7 @@ dist-*
 .pnp.*
 
 # jetbrains idea
-.idea/shelf
-.idea/workspace.xml
+.idea
 
 # local
 *.local.json
