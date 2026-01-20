@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@utility app-no-drag {
+  -webkit-app-region: no-drag !important;
+}
+
+@utility app-drag {
+  -webkit-app-region: drag !important;
+  & > * {
+    -webkit-app-region: no-drag;
+  }
+}
+
+@layer base {
+  * {
+    -webkit-app-region: no-drag;
+  }
+  body {
+    -webkit-app-region: drag;
+  }
+}
+
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+body {
+  @apply select-none;
+  @apply text-sm;
+
+  font-family: -apple-system, Helvetica, Arial, Tahoma, PingFangSC, sans-serif, "Segoe UI Emoji", "Noto Emoji";
+  font-variant-numeric: tabular-nums;
+
+  @apply bg-[#141416] text-[#ffffffea];
+}

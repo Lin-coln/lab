@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@layer components {
+  [data-component="tooltip-panel"] {
+    @apply text-xs;
+    /*@apply bg-[#29292b];*/
+    @apply bg-[#29292b99] backdrop-blur-2xl;
+    @apply text-[#ffffffcc];
+
+    @apply rounded-md z-10 overflow-hidden px-2 py-1;
+    @apply [--stroke-color:#ffffff0a];
+
+    box-shadow:
+      inset 0 0 0 1px var(--stroke-color),
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+}

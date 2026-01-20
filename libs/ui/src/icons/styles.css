@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@layer components {
+  *[data-component="icon"] {
+    @apply size-[1.25em];
+    @apply grow-0 shrink-0;
+  }
+}

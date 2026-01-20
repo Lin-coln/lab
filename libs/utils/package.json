@@ -1,0 +1,16 @@
+{
+  "name": "utils",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts",
+    "./tsconfig.common.json": "./tsconfig.common.json",
+    "./tsconfig.bun.json": "./tsconfig.bun.json",
+    "./tsconfig.browser.json": "./tsconfig.browser.json"
+  },
+  "dependencies": {
+    "commander": "^14.0.2"
+  }
+}
