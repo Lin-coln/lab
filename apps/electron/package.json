@@ -1,0 +1,14 @@
+{
+  "name": "electron",
+  "type": "module",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "build:raw": "bun run scripts/build",
+    "dev:main": "bun run build:raw --flag=dev && bunx --bun electron .",
+    "dev:renderer": "cd ../view && bun run dev",
+    "preview": "NODE_ENV=production bun run build:raw && bunx --bun electron ."
+  },
+  "dependencies": {
+    "electron": "catalog:"
+  }
+}

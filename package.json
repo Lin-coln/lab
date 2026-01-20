@@ -13,7 +13,7 @@
       "bun-plugin-tailwind": "latest",
       "chalk": "^5.4.1",
       "clsx": "^2.1.1",
-      "electron": "^38.0.0",
+      "electron": "^40.0.0",
       "react": "^19.0.0",
       "react-dom": "^19.0.0",
       "tailwindcss": "^4.1.12",

@@ -1,0 +1,9 @@
+{
+  "extends": "utils/tsconfig.bun.json",
+  "exclude": ["preload"],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*", "./*/index.ts"]
+    }
+  }
+}
