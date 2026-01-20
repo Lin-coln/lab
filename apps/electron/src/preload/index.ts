@@ -7,4 +7,5 @@ window.addEventListener("DOMContentLoaded", (event) => {
     "connect-src": "http://127.0.0.1:11434",
   });
   injectDefaultStyles();
+  console.log("[electron] preload");
 });

@@ -11,6 +11,9 @@ const toDist = (...paths: string[]) => path.join(dist, ...paths);
 if (args.flag !== "dev") await buildRenderer({ dirname: "../view" });
 await buildPreload();
 await buildMain();
+await generatePackageJson();
+
+// methods
 
 async function resolveArgs(args: string[]) {
   return Object.fromEntries(
@@ -33,7 +36,7 @@ async function buildRenderer(opts: { dirname: string }) {
   await Bun.$`
     cd ${dirname}
     bun run build
-    mv dist ${path.resolve(toDist("dist"))}
+    mv dist ${path.resolve(toDist("renderer"))}
   `;
 }
 
@@ -70,4 +73,20 @@ async function buildMain() {
       "process.env.INDEX_URL": process.env.INDEX_URL ?? "",
     },
   });
+}
+
+async function generatePackageJson() {
+  const pkg = await import("../package.json").then((x) => x.default);
+  await fs.promises.writeFile(
+    toDist("package.json"),
+    JSON.stringify(
+      {
+        name: pkg.name,
+        type: pkg.type ?? "module",
+        main: "main/index.js",
+      },
+      null,
+      2,
+    ),
+  );
 }
