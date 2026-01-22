@@ -9,12 +9,15 @@
   },
   "dependencies": {
     "clsx": "catalog:",
+    "crypto-js": "^4.2.0",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-icons": "^5.5.0",
     "ui": "catalog:",
     "valtio": "catalog:"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
     "bun-plugin-tailwind": "catalog:",
     "tailwindcss": "catalog:"
   }
