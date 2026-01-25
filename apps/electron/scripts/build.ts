@@ -1,19 +1,25 @@
 import fs from "node:fs";
 import path from "node:path";
+import type { Config } from "utils/electron";
 
 const args = await resolveArgs(process.argv.slice(2));
 
-const dist = "dist";
-fs.existsSync(dist) && (await fs.promises.rm(dist, { recursive: true }));
-await fs.promises.mkdir(dist, { recursive: true });
+const toDist = (...paths: string[]) => path.join("dist", ...paths);
+const toRenderer = (...paths: string[]) => path.join(process.cwd(), "..", process.env.RENDERER_PROJECT!, ...paths);
 
-const toDist = (...paths: string[]) => path.join(dist, ...paths);
 const isRendererDev = args.flag === "dev";
-
-isRendererDev ||
-  (await buildRenderer({
-    dirname: path.join("..", process.env.RENDERER_PROJECT!),
+const config: Config = await import(toRenderer("package.json"))
+  .then((x) => import(toRenderer(x.default.electron)))
+  .then((x) => ({
+    url: "http://localhost:3000",
+    ...x.config,
   }));
+
+// cleanup
+fs.existsSync(toDist()) && (await fs.promises.rm(toDist(), { recursive: true }));
+await fs.promises.mkdir(toDist(), { recursive: true });
+
+isRendererDev || (await buildRenderer({ dirname: toRenderer() }));
 await buildPreload();
 await buildMain();
 await generatePackageJson();
@@ -75,7 +81,7 @@ async function buildMain() {
     },
     external: ["electron"],
     define: {
-      "process.env.INDEX_URL": isRendererDev ? process.env.INDEX_URL! : "",
+      "process.env.INDEX_URL": isRendererDev ? config.url! : "",
     },
   });
 }
