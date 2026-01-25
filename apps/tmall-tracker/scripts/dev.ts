@@ -1,7 +1,7 @@
 import Renderer from "../src/index.html";
 
 const server = Bun.serve({
-  port: 3000,
+  port: 3001,
   routes: {
     "/": Renderer,
   },
