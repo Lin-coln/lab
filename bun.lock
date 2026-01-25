@@ -38,6 +38,20 @@
         "tailwindcss": "catalog:",
       },
     },
+    "apps/tmall-tracker": {
+      "name": "tmall-tracker",
+      "dependencies": {
+        "clsx": "catalog:",
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "ui": "catalog:",
+        "valtio": "catalog:",
+      },
+      "devDependencies": {
+        "bun-plugin-tailwind": "catalog:",
+        "tailwindcss": "catalog:",
+      },
+    },
     "apps/view": {
       "name": "view",
       "dependencies": {
@@ -317,6 +331,8 @@
     "tailwindcss": ["tailwindcss@4.1.18", "https://registry.npmmirror.com/tailwindcss/-/tailwindcss-4.1.18.tgz", {}, "sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw=="],
 
     "tinyglobby": ["tinyglobby@0.2.15", "https://registry.npmmirror.com/tinyglobby/-/tinyglobby-0.2.15.tgz", { "dependencies": { "fdir": "^6.5.0", "picomatch": "^4.0.3" } }, "sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ=="],
+
+    "tmall-tracker": ["tmall-tracker@workspace:apps/tmall-tracker"],
 
     "type-fest": ["type-fest@0.13.1", "https://registry.npmmirror.com/type-fest/-/type-fest-0.13.1.tgz", {}, "sha512-34R7HTnG0XIJcBSn5XhDd7nNFPRcXYRZrBB2O2jdKqYODldSzBAqzsWoZYYvduky73toYS/ESqxPvkDf/F0XMg=="],
 
