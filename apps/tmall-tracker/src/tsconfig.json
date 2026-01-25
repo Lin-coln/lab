@@ -4,6 +4,5 @@
     "paths": {
       "@/*": ["./*", "./*/index.ts"]
     }
-  },
-  "include": [".", "../../electron/node_modules/electron"]
+  }
 }
