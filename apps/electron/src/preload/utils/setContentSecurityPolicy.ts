@@ -13,6 +13,7 @@ export function setContentSecurityPolicy(content?: string | Record<string, strin
     "script-src": "self",
     "style-src": "self",
     "connect-src": "self",
+    "img-src": "self",
   };
   const convertStrToEntry = (x: string) => {
     const [key, ...items] = x.trim().split(" ");

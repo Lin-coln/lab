@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { Config } from "utils/electron";
+import type { ContentSecurityPolicy, ResolvedConfig } from "utils/electron";
 
 const args = await resolveArgs(process.argv.slice(2));
 
@@ -8,11 +8,12 @@ const toDist = (...paths: string[]) => path.join("dist", ...paths);
 const toRenderer = (...paths: string[]) => path.join(process.cwd(), "..", process.env.RENDERER_PROJECT!, ...paths);
 
 const isRendererDev = args.flag === "dev";
-const config: Config = await import(toRenderer("package.json"))
-  .then((x) => import(toRenderer(x.default.electron)))
-  .then((x) => ({
+const config: ResolvedConfig = await import(toRenderer("package.json"))
+  .then((x) => (x.default.electron ? import(toRenderer(x.default.electron)) : { config: {} }))
+  .then(({ config: cfg }) => ({
     url: "http://localhost:3000",
-    ...x.config,
+    ...cfg,
+    csp: { "connect-src": [], "img-src": [], ...(cfg.csp ?? {}) },
   }));
 
 // cleanup
@@ -20,8 +21,8 @@ fs.existsSync(toDist()) && (await fs.promises.rm(toDist(), { recursive: true }))
 await fs.promises.mkdir(toDist(), { recursive: true });
 
 isRendererDev || (await buildRenderer({ dirname: toRenderer() }));
-await buildPreload();
-await buildMain();
+await buildPreload({ csp: config.csp });
+await buildMain({ index: isRendererDev ? config.url! : "" });
 await generatePackageJson();
 
 // methods
@@ -29,7 +30,6 @@ await generatePackageJson();
 async function resolveArgs(args: string[]) {
   return Object.fromEntries(
     args
-
       .filter((x) => x.startsWith("--"))
       .map((x) => {
         let [k, v] = x.split("=");
@@ -51,7 +51,7 @@ async function buildRenderer(opts: { dirname: string }) {
   `;
 }
 
-async function buildPreload() {
+async function buildPreload(opts: { csp: ContentSecurityPolicy }) {
   await Bun.build({
     entrypoints: ["src/preload/index.ts"],
     outdir: toDist("preload"),
@@ -64,10 +64,13 @@ async function buildPreload() {
       chunk: "chunks/[name]-[hash].[ext]",
     },
     external: ["electron"],
+    define: {
+      "process.env.CSP": JSON.stringify(opts.csp),
+    },
   });
 }
 
-async function buildMain() {
+async function buildMain(opts: { index: string }) {
   await Bun.build({
     entrypoints: ["src/main.ts"],
     outdir: toDist("main"),
@@ -81,7 +84,7 @@ async function buildMain() {
     },
     external: ["electron"],
     define: {
-      "process.env.INDEX_URL": isRendererDev ? config.url! : "",
+      "process.env.INDEX_URL": opts.index,
     },
   });
 }

@@ -4,7 +4,7 @@ import { injectDefaultStyles } from "@/utils/injectDefaultStyles.ts";
 window.addEventListener("DOMContentLoaded", (event) => {
   setContentSecurityPolicy({
     "style-src": "unsafe-inline",
-    "connect-src": "http://127.0.0.1:11434",
+    ...((process.env.CSP as any) ?? {}),
   });
   injectDefaultStyles();
   console.log("[electron] preload");
