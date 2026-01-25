@@ -8,7 +8,12 @@ fs.existsSync(dist) && (await fs.promises.rm(dist, { recursive: true }));
 await fs.promises.mkdir(dist, { recursive: true });
 
 const toDist = (...paths: string[]) => path.join(dist, ...paths);
-if (args.flag !== "dev") await buildRenderer({ dirname: "../view" });
+const isRendererDev = args.flag === "dev";
+
+isRendererDev ||
+  (await buildRenderer({
+    dirname: path.join("..", process.env.RENDERER_PROJECT!),
+  }));
 await buildPreload();
 await buildMain();
 await generatePackageJson();
@@ -70,7 +75,7 @@ async function buildMain() {
     },
     external: ["electron"],
     define: {
-      "process.env.INDEX_URL": process.env.INDEX_URL ?? "",
+      "process.env.INDEX_URL": isRendererDev ? process.env.INDEX_URL! : "",
     },
   });
 }

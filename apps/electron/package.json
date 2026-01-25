@@ -4,7 +4,7 @@
   "scripts": {
     "build:raw": "bun run scripts/build",
     "dev:main": "bun run build:raw --flag=dev && cd dist && bunx --bun electron .",
-    "preview": "NODE_ENV=production bun run build:raw && cd dist && bunx --bun electron ."
+    "preview": "bun run build:raw && cd dist && bunx --bun electron ."
   },
   "dependencies": {
     "electron": "catalog:"
