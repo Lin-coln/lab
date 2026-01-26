@@ -4,11 +4,11 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./*": "./src/*.ts",
     "./tsconfig.common.json": "./tsconfig.common.json",
     "./tsconfig.bun.json": "./tsconfig.bun.json",
-    "./tsconfig.browser.json": "./tsconfig.browser.json"
+    "./tsconfig.browser.json": "./tsconfig.browser.json",
+    ".": "./src/index.ts",
+    "./electron": "./electron/index.ts"
   },
   "dependencies": {
     "commander": "^14.0.2"

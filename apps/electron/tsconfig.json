@@ -1,4 +1,5 @@
 {
+  "files": [],
   "references": [
     { "path": "./scripts/tsconfig.json" },
     { "path": "./src/preload/tsconfig.json" },

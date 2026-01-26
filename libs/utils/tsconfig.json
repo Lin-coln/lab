@@ -1,5 +1,8 @@
 {
-  "extends": "./tsconfig.bun.json",
-  "include": ["src", "bin"],
-  "exclude": ["node_modules"]
+  "files": [],
+  "references": [
+    { "path": "./src/tsconfig.json" },
+    // electron
+    { "path": "./electron/tsconfig.json" }
+  ]
 }
