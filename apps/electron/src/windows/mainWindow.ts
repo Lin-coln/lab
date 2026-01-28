@@ -1,6 +1,6 @@
 import type { BrowserWindow } from "electron";
-import { INDEX_FILENAME, toDevURL } from "./constants.ts";
 import { win, wc } from "@/helpers";
+import { MODE, toDevURL, INDEX_FILENAME } from "@/constants";
 
 let mainWin!: BrowserWindow;
 
@@ -19,6 +19,7 @@ export function createMainWindow() {
     mainWin.show();
   });
 
-  const urlOrFilePath = toDevURL("/") ?? INDEX_FILENAME;
+  const urlOrFilePath = MODE === "dev" ? toDevURL("/") : INDEX_FILENAME;
+  if (!urlOrFilePath) throw new Error("Could not find URL or file path");
   return wc.load(mainWin.webContents, urlOrFilePath);
 }

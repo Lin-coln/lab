@@ -1,11 +1,12 @@
 import { BrowserWindowHelpers } from "./BrowserWindowHelpers";
 import { WebContentsHelpers } from "./WebContentsHelpers";
+import { PRELOAD_FILENAME } from "@/constants";
 
 export const win = new BrowserWindowHelpers();
 export const wc = new WebContentsHelpers();
 
-export async function initializeHelpers(opts: { preload: string }) {
-  const { preload } = opts;
+export async function initializeHelpers() {
+  const preload = PRELOAD_FILENAME;
 
   win.setDefaultOptions({
     webPreferences: {

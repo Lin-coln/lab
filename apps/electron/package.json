@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "build:raw": "bun run scripts/build",
-    "dev:main": "bun run build:raw --flag=dev && cd dist && bunx --bun electron .",
+    "dev:main": "bun run build:raw --mode=dev && cd dist && bunx --bun electron .",
     "preview": "bun run build:raw && cd dist && bunx --bun electron ."
   },
   "dependencies": {

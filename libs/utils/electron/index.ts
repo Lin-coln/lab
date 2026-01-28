@@ -1,14 +1,16 @@
-export type Config = {
-  url?: string;
-  csp?: Partial<ContentSecurityPolicy>;
-};
+export * from "./build.ts";
 
-export type ResolvedConfig = {
-  url: string;
-  csp: ContentSecurityPolicy;
-};
-
-export type ContentSecurityPolicy = {
-  "connect-src": string[];
-  "img-src": string[];
-};
+export function resolveArgs<T extends Record<string, string | number | boolean>>(args: string[]) {
+  return Object.fromEntries(
+    args
+      .filter((x) => x.startsWith("--"))
+      .map((x) => {
+        let [k, v] = x.split("=");
+        v ??= "true";
+        try {
+          v = JSON.parse(v);
+        } catch {}
+        return [k!.slice(2), v as any];
+      }),
+  ) as T;
+}

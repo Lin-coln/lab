@@ -17,3 +17,11 @@ await Bun.build({
     chunk: "chunks/[name]-[hash].[ext]",
   },
 });
+
+// csp: {
+//   "img-src": [
+//     // image
+//     "http://p3.music.126.net/",
+//     "http://p4.music.126.net/",
+//   ],
+// },

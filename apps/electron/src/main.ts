@@ -1,6 +1,4 @@
 import { app, nativeTheme } from "electron";
-import { PRELOAD_FILENAME } from "@/windows/constants.ts";
-
 import { createMainWindow } from "@/windows/mainWindow.ts";
 import { initializeHelpers } from "@/helpers";
 
@@ -13,9 +11,7 @@ async function main() {
   nativeTheme.themeSource = "dark";
   await app.whenReady();
 
-  await initializeHelpers({
-    preload: PRELOAD_FILENAME,
-  });
+  await initializeHelpers();
 
   app.on("activate", async () => {
     await createMainWindow();

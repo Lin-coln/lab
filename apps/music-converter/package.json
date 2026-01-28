@@ -19,6 +19,5 @@
     "@types/crypto-js": "^4.2.2",
     "bun-plugin-tailwind": "catalog:",
     "tailwindcss": "catalog:"
-  },
-  "electron": "scripts/electron.config.ts"
+  }
 }
