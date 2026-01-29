@@ -3,6 +3,7 @@
   "references": [
     { "path": "./src/tsconfig.json" },
     // electron
-    { "path": "./electron/tsconfig.json" }
+    { "path": "./electron/tsconfig.json" },
+    { "path": "./electron-bun/tsconfig.json" }
   ]
 }

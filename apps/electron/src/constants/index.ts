@@ -1,22 +1,23 @@
 import path from "node:path";
 import { app } from "electron";
-import { type BuildOptions, resolveArgs } from "utils/electron";
+import type { BuildMetaData } from "utils/electron-bun";
+// import { resolveArgs } from "utils";
 
-const APP_BUILD_OPTIONS = process.env.APP_BUILD_OPTIONS as any;
-
-export const MODE = /* @__PURE__ */ getBuildOptions("mode");
 export const PRELOAD_FILENAME = /* @__PURE__ */ (() => path.join(app.getAppPath(), "preload/index.cjs"))();
 export const INDEX_FILENAME = /* @__PURE__ */ (() => path.join(app.getAppPath(), "renderer/index.html"))();
-export const APP_ARGS = /* @__PURE__ */ (() => resolveArgs<any>(process.argv.slice(2)))();
 
-export function toDevURL(pathname: string = "/") {
-  if (MODE !== "dev") throw new Error("Could not find URL or file path");
+// export const APP_ARGS = /* @__PURE__ */ (() => resolveArgs<any>(process.argv.slice(2)))();
 
-  const DEV_URL = getBuildOptions("dev_url");
-  return DEV_URL + pathname;
+export function env<T extends BuildMetaData["env"]>(val: T) {
+  return getMetaData("env") === val;
 }
 
-function getBuildOptions<K extends keyof BuildOptions>(key: K): BuildOptions[K] {
-  if (!APP_BUILD_OPTIONS) throw new Error("Could not find build option");
-  return APP_BUILD_OPTIONS[key];
+export function channel<T extends BuildMetaData["channel"]>(val: T) {
+  return getMetaData("channel") === val;
+}
+
+function getMetaData<K extends keyof BuildMetaData>(key: K): BuildMetaData[K] {
+  const metadata = process.env.APP_BUILD_META_DATA as any;
+  if (!metadata) throw new Error("Could not find metadata");
+  return metadata[key];
 }

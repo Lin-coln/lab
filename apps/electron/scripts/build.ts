@@ -1,35 +1,24 @@
-import fs from "node:fs";
 import path from "node:path";
-import { createBuildContext, resolveArgs } from "utils/electron";
+import { type BuildMetaData, build } from "utils/electron-bun";
+import { resolveArgs } from "utils";
 
-const args: { mode: "dev" | "build" } = resolveArgs(process.argv.slice(2));
-args.mode ??= "build";
+const args = resolveArgs<{ env: BuildMetaData["env"] }>(process.argv.slice(2));
+args.env ??= "prod";
 
-// create build context
-const ctx = await createBuildContext({
-  dist: "dist",
-  preload: {
-    dist: "preload",
-  },
+const rendererDirname = path.resolve(process.cwd(), "..", process.env.RENDERER_PROJECT!);
+const mainScriptFilename = path.join(rendererDirname, "./electron/index.ts");
+
+await build({
+  env: args.env,
+  channel: "internal",
+  version: "0.1.0",
   renderer: {
-    dist: "renderer",
-    dev_url: "http://localhost:3000",
-    async build(ctx) {
+    async build() {
       await Bun.$`
-        cd ${path.join(process.cwd(), "..", process.env.RENDERER_PROJECT!)}
+        cd ${rendererDirname}
         bun run build
-        mv dist ${ctx.dist.renderer()}
       `;
+      return path.join(rendererDirname, "dist");
     },
   },
 });
-
-// cleanup
-fs.existsSync(ctx.dist()) && (await fs.promises.rm(ctx.dist(), { recursive: true }));
-await fs.promises.mkdir(ctx.dist(), { recursive: true });
-
-// build
-if (args.mode !== "dev") await ctx.build_renderer();
-await ctx.build_preload();
-await ctx.build_main(args.mode);
-await ctx.generate_package_json();

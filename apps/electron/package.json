@@ -2,9 +2,9 @@
   "name": "electron",
   "type": "module",
   "scripts": {
-    "build:raw": "bun run scripts/build",
-    "dev:main": "bun run build:raw --mode=dev && cd dist && bunx --bun electron .",
-    "preview": "bun run build:raw && cd dist && bunx --bun electron ."
+    "build": "bun run scripts/build",
+    "dev:main": "bun run build --env=dev && cd dist/build && bunx --bun electron .",
+    "preview": "bun run build && cd dist/build && bunx --bun electron ."
   },
   "dependencies": {
     "electron": "catalog:"
