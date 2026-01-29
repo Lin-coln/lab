@@ -6,6 +6,7 @@ export function Header(props: { actions: ReactNode }) {
   return (
     <div
       className={cx(
+        "app-region-drag",
         "fixed top-0 left-0 w-full",
         "flex flex-row items-center",
         "pointer-events-none *:pointer-events-auto",
@@ -25,7 +26,7 @@ export function Header(props: { actions: ReactNode }) {
         <div className={cx("text-lg font-bold me-2")}>Converter</div>
       </div>
 
-      <div className={cx("ms-auto me-4", "flex flex-row items-center self-stretch")}>
+      <div className={cx("app-region-drag", "ms-auto me-4", "flex flex-row items-center self-stretch")}>
         {props.actions}
         {/*<Button*/}
         {/*  variant="subtle"*/}

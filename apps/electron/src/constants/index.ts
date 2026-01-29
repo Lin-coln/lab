@@ -19,6 +19,10 @@ export function channel<T extends BuildMetaData["channel"]>(val: T) {
   return getMetaData("channel") === val;
 }
 
+export function platform<T extends NodeJS.Process["platform"]>(val: T) {
+  return process.platform === val;
+}
+
 function getMetaData<K extends keyof BuildMetaData>(key: K): BuildMetaData[K] {
   const metadata = process.env.APP_BUILD_META_DATA as any;
   if (!metadata) throw new Error("Could not find metadata");

@@ -43,6 +43,7 @@ function usePreventScale() {
 function useFixedViewPort() {
   useLayoutEffect(() => {
     window.addEventListener("resize", handleResize);
+    handleResize();
     return () => {
       window.removeEventListener("resize", handleResize);
     };

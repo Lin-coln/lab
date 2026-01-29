@@ -8,7 +8,8 @@
     "./tsconfig.bun.json": "./tsconfig.bun.json",
     "./tsconfig.browser.json": "./tsconfig.browser.json",
     ".": "./src/index.ts",
-    "./electron-bun": "./electron-bun/index.ts"
+    "./electron-bun": "./electron-bun/index.ts",
+    "./tailwind": "./tailwind/index.css"
   },
   "dependencies": {
     "commander": "^14.0.2"

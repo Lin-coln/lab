@@ -1,0 +1,11 @@
+@custom-variant mica (&:where(html[data-material="mica"] *));
+@custom-variant vibrancy (&:where(html[data-material="vibrancy"] *));
+
+@utility app-region-drag {
+  *:where(& > *) {
+    -webkit-app-region: no-drag;
+  }
+  *:where(&) {
+    -webkit-app-region: drag;
+  }
+}

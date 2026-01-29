@@ -33,15 +33,22 @@ export default function App() {
 
   return (
     <>
-      <div className={cx("flex flex-col w-full min-h-viewport justify-start")}>
+      <div className={cx("flex flex-col w-full min-h-viewport justify-start", "app-region-drag")}>
         {targetArr.length ? (
-          <div className={cx("max-w-3xl mx-auto w-full", "my-18 px-4", "flex flex-col gap-4")}>
+          <div className={cx("app-region-drag", "max-w-3xl mx-auto w-full", "my-18 px-4", "flex flex-col gap-4")}>
             {targetArr.map((id) => {
               return <FileProfile key={id} id={id} />;
             })}
           </div>
         ) : (
-          <div className={cx("max-w-3xl mx-auto w-full grow", "px-4", "flex flex-col justify-center items-center")}>
+          <div
+            className={cx(
+              "app-region-drag",
+              "max-w-3xl mx-auto w-full grow",
+              "px-4",
+              "flex flex-col justify-center items-center",
+            )}
+          >
             <div className={cx("truncate text-xs text-neutral-50/60", "mb-4")}>
               select your audio file and convert to mp3
             </div>
