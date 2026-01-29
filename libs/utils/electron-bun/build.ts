@@ -40,11 +40,11 @@ export async function build(cfg: BuildConfig) {
     entrypoints: [cfg.preload?.entrypoint ?? "src/preload/index.ts"],
     outdir: path.join(outdir, cfg.preload?.name ?? "preload"),
     target: "browser",
-    format: "cjs",
+    format: "esm",
     sourcemap: "external",
     minify: false,
     naming: {
-      entry: "[dir]/[name].cjs",
+      entry: "[dir]/[name].js",
       chunk: "chunks/[name]-[hash].[ext]",
     },
     external: ["electron"],

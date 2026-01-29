@@ -7,7 +7,7 @@ export const win = new BrowserWindowHelpers();
 export const wc = new WebContentsHelpers();
 
 export async function initializeHelpers() {
-  const preload = path.join(app.getAppPath(), "preload/index.cjs");
+  const preload = path.join(app.getAppPath(), "preload/index.js");
 
   win.setDefaultOptions({
     webPreferences: {

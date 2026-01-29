@@ -13,6 +13,9 @@ async function main() {
 
   await initializeHelpers();
 
+  // const external = await import("#electron/index.ts");
+  // await external.onAppReady?.();
+
   app.on("activate", async () => {
     await createMainWindow();
   });
