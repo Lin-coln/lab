@@ -13,6 +13,7 @@ await build({
   channel: "internal",
   version: "0.1.0",
   renderer: {
+    url: args.env === "dev" ? "http://localhost:3000" : void 0,
     async build() {
       await Bun.$`
         cd ${rendererDirname}

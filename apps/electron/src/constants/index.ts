@@ -1,12 +1,15 @@
+import type { BuildMetaData } from "utils/electron-bun";
 import path from "node:path";
 import { app } from "electron";
-import type { BuildMetaData } from "utils/electron-bun";
 // import { resolveArgs } from "utils";
 
-export const PRELOAD_FILENAME = /* @__PURE__ */ (() => path.join(app.getAppPath(), "preload/index.cjs"))();
-export const INDEX_FILENAME = /* @__PURE__ */ (() => path.join(app.getAppPath(), "renderer/index.html"))();
-
 // export const APP_ARGS = /* @__PURE__ */ (() => resolveArgs<any>(process.argv.slice(2)))();
+
+export const INDEX_URL = /* @__PURE__ */ (() => {
+  const url = getMetaData("index_url");
+  if (url) return url;
+  return path.join(app.getAppPath(), "renderer/index.html");
+})();
 
 export function env<T extends BuildMetaData["env"]>(val: T) {
   return getMetaData("env") === val;

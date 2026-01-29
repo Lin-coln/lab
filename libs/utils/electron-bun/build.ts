@@ -1,11 +1,11 @@
 import path from "node:path";
 import fs from "node:fs";
-import url from "url";
 
 export type BuildMetaData = {
   env: "dev" | "prod";
   channel: "internal" | "official";
   version: string;
+  index_url?: string;
 };
 
 export type BuildConfig = {
@@ -15,14 +15,14 @@ export type BuildConfig = {
   entrypoint?: string;
   outdir?: string;
   preload?: { name?: string; entrypoint?: string };
-  renderer?: { name?: string; build: () => Promise<string> };
+  renderer?: { name?: string; url?: string; build: () => Promise<string> };
 };
 
 export async function build(cfg: BuildConfig) {
   const outdir = cfg.outdir ?? "dist/build";
   const { env, channel, version } = cfg;
 
-  const buildMetaData: BuildMetaData = { env, channel, version };
+  const buildMetaData: BuildMetaData = { env, channel, version, index_url: cfg.renderer?.url ?? "" };
 
   // cleanup
   fs.existsSync(path.resolve(outdir)) && (await fs.promises.rm(path.resolve(outdir), { recursive: true }));
@@ -73,9 +73,9 @@ export async function build(cfg: BuildConfig) {
   });
 
   // generate package json
-  const pkg_electron = await import(
-    path.resolve(url.fileURLToPath(import.meta.resolve("electron")), "../package.json")
-  ).then((x) => x.default);
+  const pkg_electron = await import(path.resolve(process.cwd(), "node_modules/electron/package.json")).then(
+    (x) => x.default,
+  );
   await fs.promises.writeFile(
     path.join(outdir, "package.json"),
     JSON.stringify(

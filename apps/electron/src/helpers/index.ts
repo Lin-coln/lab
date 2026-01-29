@@ -1,12 +1,13 @@
 import { BrowserWindowHelpers } from "./BrowserWindowHelpers";
 import { WebContentsHelpers } from "./WebContentsHelpers";
-import { PRELOAD_FILENAME } from "@/constants";
+import path from "node:path";
+import { app } from "electron";
 
 export const win = new BrowserWindowHelpers();
 export const wc = new WebContentsHelpers();
 
 export async function initializeHelpers() {
-  const preload = PRELOAD_FILENAME;
+  const preload = path.join(app.getAppPath(), "preload/index.cjs");
 
   win.setDefaultOptions({
     webPreferences: {
