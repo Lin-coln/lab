@@ -25,7 +25,7 @@ export async function build(cfg: BuildConfig) {
   const buildMetaData: BuildMetaData = { env, channel, version, index_url: cfg.renderer?.url ?? "" };
 
   // cleanup
-  fs.existsSync(path.resolve(outdir)) && (await fs.promises.rm(path.resolve(outdir), { recursive: true }));
+  await fs.promises.rm(path.resolve(outdir), { recursive: true, force: true });
   await fs.promises.mkdir(path.resolve(outdir), { recursive: true });
 
   // build renderer

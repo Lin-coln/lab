@@ -5,24 +5,24 @@ import { resolveArgs } from "utils";
 const args = resolveArgs<{ env: BuildMetaData["env"] }>(process.argv.slice(2));
 args.env ??= "prod";
 
-const rendererDirname = path.resolve(process.cwd(), "..", process.env.RENDERER_PROJECT!);
-const rendererConfig = (await import(path.join(rendererDirname, "package.json"))
+const toRenderer = (...paths: string[]) => path.resolve(process.cwd(), "..", process.env.RENDERER_PROJECT!, ...paths);
+const rendererConfig = (await import(toRenderer("package.json"))
   .then((x) => x.default.electron)
-  .then((x) => (x ? import(path.join(rendererDirname, x)).then((x) => x.default) : {}))
+  .then((x) => (x ? import(toRenderer(x)).then((x) => x.default) : {}))
   .then((x) => ({
     url: "http://localhost:3000",
     build: () =>
       Bun.$`
-        cd ${rendererDirname}
-        bun run build
-      `.then(() => path.join(rendererDirname, "dist")),
+        cd ${toRenderer()}
+        bun run build 
+      `.then(() => toRenderer("dist")),
     ...x,
   }))) as {
   url: string;
   build: () => Promise<string>;
 };
 
-const mainScriptFilename = path.join(rendererDirname, "./electron/index.ts");
+const mainScriptFilename = toRenderer("./electron/index.ts");
 
 await build({
   env: args.env,
