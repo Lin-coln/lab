@@ -15,7 +15,7 @@ export function createMainWindow() {
   // show devTools
   // win.webContents.openDevTools({ mode: "detach" });
 
-  mainWin.webContents.once("did-finish-load", async () => {
+  mainWin.webContents.on("did-finish-load", async () => {
     await mainWin.webContents.executeJavaScript(
       `document.documentElement.dataset.material = ${JSON.stringify(platform("win32") ? "mica" : "vibrancy")};`,
     );

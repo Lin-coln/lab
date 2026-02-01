@@ -28,7 +28,7 @@ export default function App() {
         )}
       >
         {targetArr.length ? (
-          <div className={cx("max-w-3xl mx-auto w-full", "my-18 px-4", "flex flex-col gap-4")}>
+          <div className={cx("max-w-3xl mx-auto w-full", "my-16 px-4", "flex flex-col gap-4")}>
             {targetArr.map((id) => {
               return <FileProfile key={id} id={id} />;
             })}
@@ -48,7 +48,7 @@ export default function App() {
             <Button
               icon={<FaPlus size={16} className="mx-1" />}
               label={<div className="-translate-y-px me-1.5">select files</div>}
-              className={["h-10", "rounded-xl", "text-neutral-50/80"]}
+              className={["h-8", "rounded-lg", "text-neutral-50/80"]}
               onClick={() => {
                 filePicker.open();
               }}
