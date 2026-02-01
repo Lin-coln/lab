@@ -26,7 +26,7 @@ export async function initializeHelpers() {
       ? {
           vibrancy: "under-window", // blur
           visualEffectState: "active",
-          trafficLightPosition: { x: 18, y: 18 },
+          trafficLightPosition: { x: 24, y: 24 },
         }
       : {}),
   });

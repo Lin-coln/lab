@@ -19,23 +19,16 @@ export default function App() {
     }
   });
 
-  const selectButton = (
-    <Button
-      variant={targetArr.length ? "subtle" : "standard"}
-      icon={<FaPlus size={16} className="mx-1" />}
-      label={<div className="-translate-y-px me-1.5">select files</div>}
-      className={["h-11", "rounded-2xl", targetArr.length ? "text-neutral-50/70" : "text-neutral-50/80"]}
-      onClick={() => {
-        filePicker.open();
-      }}
-    />
-  );
-
   return (
     <>
-      <div className={cx("flex flex-col w-full min-h-viewport justify-start", "app-region-drag")}>
+      <div
+        className={cx(
+          "flex flex-col w-full min-h-viewport justify-start items-center",
+          // "app-region-drag"
+        )}
+      >
         {targetArr.length ? (
-          <div className={cx("app-region-drag", "max-w-3xl mx-auto w-full", "my-18 px-4", "flex flex-col gap-4")}>
+          <div className={cx("max-w-3xl mx-auto w-full", "my-18 px-4", "flex flex-col gap-4")}>
             {targetArr.map((id) => {
               return <FileProfile key={id} id={id} />;
             })}
@@ -52,12 +45,34 @@ export default function App() {
             <div className={cx("truncate text-xs text-neutral-50/60", "mb-4")}>
               select your audio file and convert to mp3
             </div>
-            {selectButton}
+            <Button
+              icon={<FaPlus size={16} className="mx-1" />}
+              label={<div className="-translate-y-px me-1.5">select files</div>}
+              className={["h-10", "rounded-xl", "text-neutral-50/80"]}
+              onClick={() => {
+                filePicker.open();
+              }}
+            />
           </div>
         )}
       </div>
 
-      <Header actions={Boolean(targetArr.length) && selectButton} />
+      <Header
+        actions={
+          Boolean(targetArr.length) && (
+            <Button
+              variant="subtle"
+              icon={<FaPlus size={16} className="mx-1" />}
+              size="medium"
+              label={<div className="-translate-y-px me-1.5">select files</div>}
+              className={["text-neutral-50/70"]}
+              onClick={() => {
+                filePicker.open();
+              }}
+            />
+          )
+        }
+      />
 
       {filePicker.renderInput()}
     </>
