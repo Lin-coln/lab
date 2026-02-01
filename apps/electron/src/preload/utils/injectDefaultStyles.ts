@@ -22,14 +22,8 @@ export function injectDefaultStyles() {
   function genCssContent() {
     return `
     /* electron */
-    *:where(body) {
-      -webkit-app-region: drag;
-    }
-    *:where(body > *) {
-      -webkit-app-region: no-drag;
-    }
-    * {
-      user-select: none;
+    :root {
+      --safe-area-left: 88px;
     }
     `;
   }
