@@ -7,9 +7,10 @@
     "./tsconfig.common.json": "./tsconfig.common.json",
     "./tsconfig.bun.json": "./tsconfig.bun.json",
     "./tsconfig.browser.json": "./tsconfig.browser.json",
-    ".": "./src/index.ts",
+    "./plugins/*": "./plugins/*/index.ts",
+    "./tailwind": "./tailwind/index.css",
     "./electron-bun": "./electron-bun/index.ts",
-    "./tailwind": "./tailwind/index.css"
+    ".": "./src/index.ts"
   },
   "dependencies": {
     "commander": "^14.0.2"
