@@ -43,6 +43,7 @@ export async function build(cfg: BuildConfig) {
     format: "esm",
     sourcemap: "external",
     minify: false,
+    metafile: true,
     naming: {
       entry: "[dir]/[name].js",
       chunk: "chunks/[name]-[hash].[ext]",
@@ -50,6 +51,11 @@ export async function build(cfg: BuildConfig) {
     external: ["electron"],
     define: {},
   });
+  // const preloadEntrypoint = preloadOutput.outputs.find((x) => x.kind === "entry-point")!;
+  // const preloadSha256 = new Bun.CryptoHasher("sha256")
+  //   .update(await Bun.file(preloadEntrypoint.path).arrayBuffer())
+  //   .digest("hex");
+  // console.log("preload sha256", preloadSha256);
 
   // build main
   await Bun.build({
@@ -59,6 +65,7 @@ export async function build(cfg: BuildConfig) {
     format: "esm",
     sourcemap: "external",
     minify: false,
+    metafile: true,
     naming: {
       entry: "[dir]/index.js",
       chunk: "chunks/[name]-[hash].[ext]",
