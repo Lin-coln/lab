@@ -7,6 +7,7 @@ import { Button } from "ui";
 import { FaPlus } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import { MdFace } from "react-icons/md";
+import { BiLinkExternal } from "react-icons/bi";
 
 export default function App() {
   useInitializeEffects();
@@ -59,13 +60,14 @@ export default function App() {
                     <div className="truncate text-sm text-neutral-50/60">LinColn</div>
                     <div className="truncate text-xs text-neutral-50/40 font-normal">author</div>
                   </div>
+                  <BiLinkExternal className="ml-auto text-neutral-50/40" />
                 </div>
               }
               onClick={() => {
                 window.open("https://github.com/Lin-coln", "blank");
               }}
             />
-            <div className="text-xs p-1 mt-1 text-neutral-50/60">
+            <div className="text-xs p-1 mt-1 text-neutral-50/60 break-all">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa facilis id tenetur. Debitis, facilis,
               vitae? Aspernatur aut explicabo facere maiores repellendus! Beatae ipsum, minus! Ab exercitationem
               inventore laudantium provident veniam.

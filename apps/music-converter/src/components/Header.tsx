@@ -16,7 +16,7 @@ export function Header(props: { menu: ReactNode; actions: ReactNode }) {
         "pl-safe-area pr-safe-area",
       )}
     >
-      <Popover open={openMenu} setOpen={(open) => setOpenMenu(open)} placement="bottom-start">
+      <Popover open={openMenu} setOpen={(open) => setOpenMenu(open)} placement="bottom">
         <Popover.Trigger>
           <div
             className={cx(
