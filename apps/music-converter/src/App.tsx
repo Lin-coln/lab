@@ -25,9 +25,9 @@ export default function App() {
       <div className={cx("flex flex-col w-full min-h-viewport justify-start items-center")}>
         {targetArr.length ? (
           <div className={cx("max-w-3xl mx-auto w-full", "my-16 px-4", "flex flex-col gap-4")}>
-            {targetArr.map((id) => {
-              return <FileProfile key={id} id={id} />;
-            })}
+            {targetArr.map((id) => (
+              <FileProfile key={id} id={id} />
+            ))}
           </div>
         ) : (
           <div className={cx("max-w-3xl mx-auto w-full grow", "px-4", "flex flex-col justify-center items-center")}>
@@ -36,8 +36,8 @@ export default function App() {
             </div>
             <Button
               icon={<FaPlus size={16} className="mx-1" />}
-              label={<div className="-translate-y-px me-1.5">select files</div>}
-              className={["h-8", "rounded-lg", "text-neutral-50/80"]}
+              label={<div>select files</div>}
+              size="large"
               onClick={() => {
                 filePicker.open();
               }}
@@ -45,12 +45,12 @@ export default function App() {
           </div>
         )}
       </div>
-
       <Header
         menu={
           <>
             <Button
               variant="subtle"
+              size="large"
               className={["w-full h-fit", "p-2"]}
               label={
                 <div className="flex flex-row w-full items-center">
@@ -65,7 +65,7 @@ export default function App() {
                 window.open("https://github.com/Lin-coln", "blank");
               }}
             />
-            <div className="text-xs p-1 text-neutral-50/60">
+            <div className="text-xs p-1 mt-1 text-neutral-50/60">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa facilis id tenetur. Debitis, facilis,
               vitae? Aspernatur aut explicabo facere maiores repellendus! Beatae ipsum, minus! Ab exercitationem
               inventore laudantium provident veniam.
@@ -78,7 +78,7 @@ export default function App() {
               variant="subtle"
               icon={<FaPlus size={16} className="mx-1" />}
               size="medium"
-              label={<div className="-translate-y-px me-1.5">select files</div>}
+              label={<div>select files</div>}
               className={["text-neutral-50/70"]}
               onClick={() => {
                 filePicker.open();
