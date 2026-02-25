@@ -1,5 +1,5 @@
 import { proxy, useSnapshot } from "valtio";
-import { parseMusicFileNCM } from "@/stores/core.ncm.ts";
+import { parseMusicFileNCM } from "@/stores/ncm.ts";
 
 type Target = {
   id: string;
