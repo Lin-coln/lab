@@ -17,7 +17,10 @@ export function createMainWindow() {
 
   mainWin.webContents.on("did-finish-load", async () => {
     await mainWin.webContents.executeJavaScript(
-      `document.documentElement.dataset.material = ${JSON.stringify(platform("win32") ? "mica" : "vibrancy")};`,
+      [
+        `document.documentElement.dataset.material = ${JSON.stringify(platform("win32") ? "mica" : "vibrancy")}`,
+        `document.documentElement.dataset.platform = ${JSON.stringify(process.platform)}`,
+      ].join(";\n"),
     );
   });
 

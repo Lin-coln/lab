@@ -22,7 +22,7 @@ export function injectDefaultStyles() {
   function genCssContent() {
     return `
     /* electron */
-    :root {
+    html[data-platform="darwin"] {
       --safe-area-left: 88px;
     }
     `;
