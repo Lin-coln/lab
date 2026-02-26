@@ -8,6 +8,7 @@ import { FaPlus } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import { MdFace } from "react-icons/md";
 import { BiLinkExternal } from "react-icons/bi";
+import { BottomPresence } from "@/components/BottomPanel.tsx";
 
 export default function App() {
   useInitializeEffects();
@@ -23,9 +24,9 @@ export default function App() {
 
   return (
     <>
-      <div className={cx("flex flex-col w-full min-h-viewport justify-start items-center")}>
+      <div className={cx("flex flex-col w-full min-h-viewport justify-between items-center")}>
         {targetArr.length ? (
-          <div className={cx("max-w-3xl mx-auto w-full", "my-16 px-4", "flex flex-col gap-4")}>
+          <div className={cx("max-w-3xl mx-auto w-full", "mt-16 px-4", "flex flex-col gap-4")}>
             {targetArr.map((id) => (
               <FileProfile key={id} id={id} />
             ))}
@@ -44,6 +45,25 @@ export default function App() {
               }}
             />
           </div>
+        )}
+
+        {Boolean(targetArr.length) && (
+          <BottomPresence>
+            <Button
+              variant="standard"
+              icon={<FaPlus size={16} className="mx-1" />}
+              label={<div>select files</div>}
+              className={[
+                "text-neutral-50/70",
+                "rounded-2xl! overflow-hidden",
+                "w-32! h-12!",
+                "m-6", // sticky animation cannot use padding
+              ]}
+              onClick={() => {
+                filePicker.open();
+              }}
+            />
+          </BottomPresence>
         )}
       </div>
       <Header
@@ -73,20 +93,6 @@ export default function App() {
               inventore laudantium provident veniam.
             </div>
           </>
-        }
-        actions={
-          Boolean(targetArr.length) && (
-            <Button
-              variant="subtle"
-              icon={<FaPlus size={16} className="mx-1" />}
-              size="medium"
-              label={<div>select files</div>}
-              className={["text-neutral-50/70"]}
-              onClick={() => {
-                filePicker.open();
-              }}
-            />
-          )
         }
       />
 

@@ -16,7 +16,7 @@ export function FileProfile(props: { id: string }) {
         "flex flex-row items-center",
         "bg-neutral-400/5",
         "max-w-full min-h-20",
-        "rounded-3xl p-4", //
+        "rounded-xl p-4", //
         "hover:ring-1 ring-neutral-50/10",
       )}
     >

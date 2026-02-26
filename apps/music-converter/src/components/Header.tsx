@@ -3,7 +3,7 @@ import { IoMdMusicalNote } from "react-icons/io";
 import { type ReactNode, useState } from "react";
 import { Popover } from "ui";
 
-export function Header(props: { menu: ReactNode; actions: ReactNode }) {
+export function Header(props: { menu: ReactNode }) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -36,8 +36,6 @@ export function Header(props: { menu: ReactNode; actions: ReactNode }) {
           {props.menu}
         </Popover.Content>
       </Popover>
-
-      <div className={cx("app-region-drag", "ms-auto", "flex flex-row items-center self-stretch")}>{props.actions}</div>
     </div>
   );
 }
