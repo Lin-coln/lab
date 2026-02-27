@@ -4,11 +4,11 @@ import { Button } from "ui";
 import { MdFace } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { BiLinkExternal } from "react-icons/bi";
-import { useInitializeEffects } from "@/hooks/useInitializeEffects.ts";
-import { appendTarget, useAppStore } from "@/stores/app.store.ts";
-import { Header } from "@/components/Header.tsx";
-import { BottomPanel } from "@/components/BottomPanel.tsx";
-import { FileProfile } from "@/components/FileProfile.tsx";
+import { useInitializeEffects } from "@/hooks/useInitializeEffects";
+import { appendTarget, useAppStore } from "@/stores/app.store";
+import { Header } from "@/components/Header";
+import { BottomPanel } from "@/components/BottomPanel";
+import { FileProfile } from "@/components/FileProfile";
 
 export default function App() {
   useInitializeEffects();

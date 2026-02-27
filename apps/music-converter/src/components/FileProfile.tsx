@@ -1,9 +1,9 @@
 import { Button } from "ui";
-import { useAppStore, deleteTarget, parseInfo } from "@/stores/app.store.ts";
+import { useAppStore, deleteTarget, parseInfo } from "@/stores/app.store";
 import cx from "clsx";
 import { FaXmark } from "react-icons/fa6";
 import { BsFileEarmarkFill } from "react-icons/bs";
-import { LazyImage } from "@/components/LazyImage.tsx";
+import { LazyImage } from "@/components/LazyImage";
 
 export function FileProfile(props: { id: string }) {
   const { targets, info: infoDict } = useAppStore();

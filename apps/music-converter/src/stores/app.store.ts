@@ -1,5 +1,5 @@
 import { proxy, useSnapshot } from "valtio";
-import { parseMusicFileNCM } from "@/stores/ncm.ts";
+import { parseMusicFileNCM } from "@/stores/ncm";
 import { sha256 } from "./sha256";
 
 type Target = {
