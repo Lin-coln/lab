@@ -1,14 +1,14 @@
+import { useEffect, useRef, useState } from "react";
+import cx from "clsx";
+import { Button } from "ui";
+import { MdFace } from "react-icons/md";
+import { FaPlus } from "react-icons/fa6";
+import { BiLinkExternal } from "react-icons/bi";
 import { useInitializeEffects } from "@/hooks/useInitializeEffects.ts";
 import { appendTarget, useAppStore } from "@/stores/app.store.ts";
-import { FileProfile } from "@/components/FileProfile.tsx";
-import cx from "clsx";
 import { Header } from "@/components/Header.tsx";
-import { Button } from "ui";
-import { FaPlus } from "react-icons/fa6";
-import { useEffect, useRef, useState } from "react";
-import { MdFace } from "react-icons/md";
-import { BiLinkExternal } from "react-icons/bi";
-import { BottomPresence } from "@/components/BottomPanel.tsx";
+import { BottomPanel } from "@/components/BottomPanel.tsx";
+import { FileProfile } from "@/components/FileProfile.tsx";
 
 export default function App() {
   useInitializeEffects();
@@ -48,22 +48,23 @@ export default function App() {
         )}
 
         {Boolean(targetArr.length) && (
-          <BottomPresence>
+          <BottomPanel
+            className={[
+              "rounded-2xl overflow-hidden",
+              "min-w-32 min-h-12", // ...
+              "m-6", // sticky animation cannot use padding
+            ]}
+          >
             <Button
-              variant="standard"
+              variant="subtle"
               icon={<FaPlus size={16} className="mx-1" />}
               label={<div>select files</div>}
-              className={[
-                "text-neutral-50/70",
-                "rounded-2xl! overflow-hidden",
-                "w-32! h-12!",
-                "m-6", // sticky animation cannot use padding
-              ]}
+              className={["text-neutral-50/70!", "w-32! h-12! rounded-2xl!"]}
               onClick={() => {
                 filePicker.open();
               }}
             />
-          </BottomPresence>
+          </BottomPanel>
         )}
       </div>
       <Header
