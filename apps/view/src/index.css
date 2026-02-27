@@ -3,6 +3,8 @@
 
 * {
   scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -13,9 +15,7 @@ body {
   font-family: -apple-system, Helvetica, Arial, Tahoma, PingFangSC, sans-serif, "Segoe UI Emoji", "Noto Emoji";
   font-variant-numeric: tabular-nums;
 
-  /*@apply bg-[#f8f8f8] text-[#121212ea];*/
-  /*@apply dark:bg-[#141416] dark:text-[#ffffffea];*/
   @apply bg-[#141416] text-[#ffffffea];
   @apply mica:bg-transparent;
-  @apply vibrancy:bg-[#141416]/60;
+  @apply vibrancy:bg-[#141416]/80;
 }

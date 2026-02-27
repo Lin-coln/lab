@@ -1,5 +1,5 @@
-import tailwind from "bun-plugin-tailwind";
 import fs from "node:fs";
+import tailwind from "bun-plugin-tailwind";
 
 const dist = "dist";
 if (fs.existsSync(dist)) await fs.promises.rm(dist, { recursive: true });
