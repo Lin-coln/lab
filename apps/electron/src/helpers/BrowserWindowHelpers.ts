@@ -8,12 +8,17 @@ const defaultOptions: BWOptions = {
   minWidth: 320,
   minHeight: 480,
   webPreferences: {
-    nodeIntegration: false,
     contextIsolation: true,
-    sandbox: false,
+    nodeIntegration: false,
+    nodeIntegrationInWorker: false,
+    nodeIntegrationInSubFrames: false,
+    sandbox: true,
     webSecurity: true,
     devTools: false,
     spellcheck: false,
+    webviewTag: false,
+    allowRunningInsecureContent: false,
+    experimentalFeatures: false,
   },
 };
 
