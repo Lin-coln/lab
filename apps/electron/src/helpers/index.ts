@@ -21,11 +21,15 @@ export async function initializeHelpers() {
     titleBarOverlay: platform("win32")
       ? { color: "#00000000", symbolColor: "#7f7f7f", height: 32 }
       : { color: "#141416", symbolColor: "#f5f5f5", height: 32 },
-    ...(process.platform === "win32" ? { backgroundMaterial: "mica" } : {}),
+    ...(process.platform === "win32"
+      ? {
+          // backgroundMaterial: "mica"
+        }
+      : {}),
     ...(process.platform === "darwin"
       ? {
-          vibrancy: "under-window", // blur
-          visualEffectState: "active",
+          // vibrancy: "under-window", // blur
+          // visualEffectState: "active",
           trafficLightPosition: { x: 24, y: 24 },
         }
       : {}),
