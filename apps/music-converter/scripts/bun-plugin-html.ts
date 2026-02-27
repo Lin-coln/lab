@@ -6,7 +6,10 @@ export default html({
       "self",
       "unsafe-inline", // todo: use sha256 or nonce for preload script
     ],
-    // "script-src": ["self"],
+    "script-src": [
+      "self",
+      "blob:", // todo: bun hmr
+    ],
     // "style-src": ["self"],
     "connect-src": ["self", "https://api.github.com/users/lin-coln"],
     "img-src": [
