@@ -1,10 +1,14 @@
 @import "tailwindcss";
+@reference "utils/tailwind"
 
 * {
   scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
+  @apply app-region-drag;
   @apply select-none;
   @apply text-sm;
 
@@ -12,4 +16,6 @@ body {
   font-variant-numeric: tabular-nums;
 
   @apply bg-[#141416] text-[#ffffffea];
+  @apply mica:bg-transparent;
+  @apply vibrancy:bg-[#141416]/80;
 }
