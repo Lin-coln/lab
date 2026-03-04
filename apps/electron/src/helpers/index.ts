@@ -1,11 +1,13 @@
-import { BrowserWindowHelpers } from "./BrowserWindowHelpers";
-import { WebContentsHelpers } from "./WebContentsHelpers";
 import path from "node:path";
 import { app } from "electron";
 import { channel, platform } from "@/constants";
+import { BrowserWindowHelpers } from "./BrowserWindowHelpers";
+import { WebContentsHelpers } from "./WebContentsHelpers";
+import { ExtensionHelper } from "./ExtensionHelper.ts";
 
 export const win = new BrowserWindowHelpers();
 export const wc = new WebContentsHelpers();
+export const ext = new ExtensionHelper();
 
 export async function initializeHelpers() {
   const preload = path.join(app.getAppPath(), "preload/index.js");

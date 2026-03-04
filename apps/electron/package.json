@@ -7,6 +7,10 @@
     "preview": "bun run build && cd dist/build && bunx --bun electron ."
   },
   "dependencies": {
-    "electron": "catalog:"
+    "electron": "catalog:",
+    "yauzl": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/yauzl": "^2.10.3"
   }
 }
