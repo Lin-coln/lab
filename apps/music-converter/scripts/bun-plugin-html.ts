@@ -9,6 +9,7 @@ export default html({
     "script-src": [
       "self",
       "blob:", // todo: bun hmr
+      "unsafe-inline",
     ],
     // "style-src": ["self"],
     "connect-src": ["self", "https://api.github.com/users/lin-coln"],
