@@ -15,6 +15,7 @@ export default html({
     "connect-src": ["self", "https://api.github.com/users/lin-coln"],
     "img-src": [
       "self",
+      "data:",
       // netease
       "http://p3.music.126.net",
       "http://p4.music.126.net",

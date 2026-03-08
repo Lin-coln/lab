@@ -22,8 +22,10 @@ export function injectDefaultStyles() {
   function genCssContent() {
     return `
     /* electron */
-    html[data-platform="darwin"] {
-      --safe-area-left: 88px;
+    @layer base {
+      *:where([data-platform="darwin"] *) {
+        --safe-area-left: 88px;
+      }
     }
     `;
   }

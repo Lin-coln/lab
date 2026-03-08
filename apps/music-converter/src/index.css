@@ -1,17 +1,19 @@
 @import "tailwindcss";
 @import "utils/tailwind";
 
-:root {
-  --viewport-height: 100vh;
-}
-@utility min-h-viewport {
-  min-height: var(--viewport-height);
+@layer base {
+  :root {
+    --viewport-height: 100vh;
+  }
+  * {
+    scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
-* {
-  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
-  -webkit-user-drag: none;
-  -webkit-tap-highlight-color: transparent;
+@utility min-h-viewport {
+  min-height: var(--viewport-height);
 }
 
 body {
