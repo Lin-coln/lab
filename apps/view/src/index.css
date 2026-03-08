@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@reference "utils/tailwind"
+@import "utils/tailwind";
 
 * {
   scrollbar-color: rgba(255, 255, 255, 0.08) transparent;

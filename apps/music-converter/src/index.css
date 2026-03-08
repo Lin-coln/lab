@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@reference "utils/tailwind"
+@import "utils/tailwind";
 
 :root {
   --viewport-height: 100vh;
