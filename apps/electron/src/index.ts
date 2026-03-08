@@ -16,7 +16,7 @@ async function main() {
   await initializeHelpers();
 
   // react devtools
-  await ext.install({ storeId: "fmkadmapgofadopljbjfkapdkoienihi", allowFileAccess: true, force: true });
+  await ext.install({ storeId: "fmkadmapgofadopljbjfkapdkoienihi", allowFileAccess: true });
 
   // const external = await import("#electron/index.ts");
   // await external.onAppReady?.();
