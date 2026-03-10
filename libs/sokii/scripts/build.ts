@@ -5,7 +5,7 @@ import * as path from "node:path";
 const dist = path.resolve(import.meta.dir, "../dist");
 if (fs.existsSync(dist)) await fs.promises.rm(dist, { recursive: true });
 
-// const name = process.env.SOKII_NAME ?? "sokii";
+// const name = process.env.SOKII_NAME ?? "sokii"; ...
 // console.log("SOKII_NAME", name);
 
 const cfg: BuildConfigBase = {
