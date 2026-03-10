@@ -1,0 +1,4 @@
+{
+  "extends": "utils/tsconfig.bun.json",
+  "exclude": ["pages", "node_modules", "dist"]
+}
