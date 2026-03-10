@@ -1,0 +1,29 @@
+{
+  "name": "agent",
+  "type": "module",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "app:preview": "NODE_ENV=production bun run raw:build && bunx --bun electron .",
+    "dev:main": "bun run raw:build --flag=dev && bunx --bun electron .",
+    "dev:renderer": "bun run scripts/dev-renderer.ts",
+    "raw:build": "bun run scripts/build.ts"
+  },
+  "dependencies": {
+    "clsx": "catalog:",
+    "electron": "catalog:",
+    "framer-motion": "^12.23.12",
+    "markdown-it": "^14.1.0",
+    "ollama": "^0.5.17",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tailwindcss": "catalog:",
+    "ui": "catalog:",
+    "valtio": "catalog:",
+    "zod": "^3",
+    "zod-to-json-schema": "^3.24.6"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "bun-plugin-tailwind": "catalog:"
+  }
+}

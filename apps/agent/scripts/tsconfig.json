@@ -1,0 +1,4 @@
+{
+  "extends": "utils/tsconfig.bun.json",
+  "include": [".", "../node_modules/ui"]
+}

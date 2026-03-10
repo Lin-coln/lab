@@ -1,0 +1,11 @@
+{
+  "extends": "utils/tsconfig.bun.json",
+  "exclude": ["preload", "renderer"],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*", "./*/index.ts"],
+      "@shared/*": ["../shared/*", "../shared/*/index.ts", "../shared/*/index.tsx"]
+    }
+  },
+  "include": [".", "../node_modules/elpers"]
+}

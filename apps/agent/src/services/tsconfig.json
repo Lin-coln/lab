@@ -1,0 +1,9 @@
+{
+  "extends": "utils/tsconfig.bun.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*", "./*/index.ts"],
+      "@shared/*": ["../../shared/*", "../../shared/*/index.ts", "../../shared/*/index.tsx"]
+    }
+  }
+}
