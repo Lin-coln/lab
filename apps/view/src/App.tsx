@@ -1,6 +1,17 @@
 import { Button } from "ui";
 import cx from "clsx";
+import { useRouter } from "utils/react";
+
 export default function App() {
+  const routeNode = useRouter({
+    mode: "history",
+    getRoute: (name: string) => ({ "/": Index })[name],
+  });
+
+  return routeNode;
+}
+
+function Index() {
   return (
     <div className={cx("flex flex-col justify-center items-center min-h-screen", "app-region-drag")}>
       <div className="max-w-120 mb-8">
