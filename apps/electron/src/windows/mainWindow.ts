@@ -1,6 +1,6 @@
 import { type BrowserWindow } from "electron";
 import { win, wc } from "@/helpers";
-import { INDEX_URL, platform } from "@/constants";
+import { INDEX_URL } from "@/constants";
 
 let mainWin!: BrowserWindow;
 
@@ -28,5 +28,36 @@ export function createMainWindow() {
     mainWin.show();
   });
 
-  return wc.load(mainWin.webContents, INDEX_URL);
+  return wc.load(mainWin.webContents, INDEX_URL, {
+    // hash: ''
+  });
+}
+
+export function disposeMainWindow() {
+  if (!mainWin) return;
+  win.ensureDisposed(mainWin);
+}
+
+function _keepAliveWin(win: BrowserWindow, getCurrentWin: () => BrowserWindow) {
+  const isCurWin = () => getCurrentWin() === win;
+
+  const recreateWindow = () => {
+    // disposeWindow();
+    // void createWindow();
+  };
+
+  win.on("close", (event) => {
+    if (!isCurWin()) return;
+    event.preventDefault();
+  });
+  win.webContents.on("render-process-gone", (event, details) => {
+    if (!isCurWin()) return;
+    console.error("⚠️ Service renderer crashed:", details);
+    recreateWindow();
+  });
+  win.webContents.on("unresponsive", () => {
+    if (!isCurWin()) return;
+    console.warn("⚠️ Service renderer is unresponsive, restarting...");
+    recreateWindow();
+  });
 }
