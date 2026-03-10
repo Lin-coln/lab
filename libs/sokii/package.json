@@ -13,18 +13,6 @@
       "bun": "./src/worker/index.ts",
       "import": "./dist/worker/index.js",
       "require": "./dist/worker/index.cjs"
-    },
-    "./electron/renderer": {
-      "types": "./src/electron/renderer/index.ts",
-      "bun": "./src/electron/renderer/index.ts",
-      "import": "./dist/electron/renderer/index.js",
-      "require": "./dist/electron/renderer/index.cjs"
-    },
-    "./electron/main": {
-      "types": "./src/electron/main/index.ts",
-      "bun": "./src/electron/main/index.ts",
-      "import": "./dist/electron/main/index.js",
-      "require": "./dist/electron/main/index.cjs"
     }
   },
   "files": [
