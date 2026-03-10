@@ -1,0 +1,37 @@
+name: Sokii Test
+on:
+  push:
+    branches:
+      - "release/sokii"
+    paths:
+      - ".github/workflows/sokii_test.yml"
+      - "libs/sokii/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bun install --filter libs/sokii
+
+      - name: Run Bun Test
+        run: |
+          cd libs/sokii
+          bun test --coverage --coverage-reporter=lcov --coverage-reporter=text
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./libs/sokii/coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}

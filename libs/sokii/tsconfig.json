@@ -1,0 +1,6 @@
+{
+  "extends": "utils/tsconfig.bun.json",
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+  }
+}

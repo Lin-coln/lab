@@ -67,6 +67,9 @@
         "tailwindcss": "catalog:",
       },
     },
+    "libs/sokii": {
+      "name": "sokii",
+    },
     "libs/ui": {
       "name": "ui",
       "dependencies": {
@@ -304,6 +307,8 @@
     "semver-compare": ["semver-compare@1.0.0", "https://registry.npmmirror.com/semver-compare/-/semver-compare-1.0.0.tgz", {}, "sha512-YM3/ITh2MJ5MtzaM429anh+x2jiLVjqILF4m4oyQB18W7Ggea7BfqdH/wGMK7dDiMghv/6WG7znWMwUDzJiXow=="],
 
     "serialize-error": ["serialize-error@7.0.1", "https://registry.npmmirror.com/serialize-error/-/serialize-error-7.0.1.tgz", { "dependencies": { "type-fest": "^0.13.1" } }, "sha512-8I8TjW5KMOKsZQTvoxjuSIa7foAwPWGOts+6o7sgjz41/qMD9VQHEDxi6PBvK2l0MXUmqZyNpUK+T2tQaaElvw=="],
+
+    "sokii": ["sokii@workspace:libs/sokii"],
 
     "sort-object-keys": ["sort-object-keys@2.1.0", "https://registry.npmmirror.com/sort-object-keys/-/sort-object-keys-2.1.0.tgz", {}, "sha512-SOiEnthkJKPv2L6ec6HMwhUcN0/lppkeYuN1x63PbyPRrgSPIuBJCiYxYyvWRTtjMlOi14vQUCGUJqS6PLVm8g=="],
 
