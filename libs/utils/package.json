@@ -10,9 +10,14 @@
     "./plugins/*": "./plugins/*/index.ts",
     "./tailwind": "./tailwind/index.css",
     "./electron-bun": "./electron-bun/index.ts",
+    "./react": "./react/index.tsx",
     ".": "./src/index.ts"
   },
   "dependencies": {
     "commander": "^14.0.2"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "tailwindcss": "catalog:"
   }
 }
