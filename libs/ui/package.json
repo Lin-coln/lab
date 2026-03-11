@@ -1,6 +1,11 @@
 {
   "name": "ui",
   "private": true,
+  "files": [
+    "package.json",
+    "src",
+    "!src/**/*.test.ts"
+  ],
   "type": "module",
   "exports": {
     ".": {
@@ -22,11 +27,6 @@
       "require": "./src/icons/index.ts"
     }
   },
-  "files": [
-    "package.json",
-    "src",
-    "!src/**/*.test.ts"
-  ],
   "dependencies": {
     "@floating-ui/react": "^0.27.16"
   },
