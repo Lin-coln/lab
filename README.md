@@ -1,0 +1,8 @@
+- bun: https://bun.com/docs
+- registry: https://npmx.dev
+- oxfmt: https://oxc.rs/docs/guide/usage/formatter.html
+- tailwindcss: https://tailwindcss.com
+- valtio
+- electron
+- react
+- commander
