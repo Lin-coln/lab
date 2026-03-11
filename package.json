@@ -1,9 +1,8 @@
 {
   "name": "lab",
   "private": true,
-  "repository": "https://github.com/Lin-coln/lab.git",
   "author": "lin-coln",
-  "type": "module",
+  "repository": "https://github.com/Lin-coln/lab.git",
   "workspaces": {
     "packages": [
       "apps/*",
@@ -21,8 +20,9 @@
       "valtio": "^2.1.7"
     }
   },
+  "type": "module",
   "scripts": {
-    "precommit": "bunx --bun prettier --write .",
+    "precommit": "bunx --bun oxfmt",
     "prepare": "husky"
   },
   "dependencies": {
@@ -30,8 +30,10 @@
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "husky": "^9.1.7",
-    "prettier": "^3.6.2",
-    "prettier-plugin-packagejson": "^2.5.19",
+    "oxfmt": "^0.38.0",
     "utils": "workspace:*"
+  },
+  "lint-staged": {
+    "*": "oxfmt"
   }
 }

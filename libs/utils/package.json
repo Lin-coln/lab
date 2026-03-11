@@ -1,8 +1,8 @@
 {
   "name": "utils",
   "private": true,
-  "sideEffects": false,
   "type": "module",
+  "sideEffects": false,
   "exports": {
     "./tsconfig.common.json": "./tsconfig.common.json",
     "./tsconfig.bun.json": "./tsconfig.bun.json",
