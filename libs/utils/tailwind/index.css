@@ -1,3 +1,6 @@
+@reference "tailwindcss";
+@layer properties，theme, base, components, utilities;
+
 @custom-variant mica (&:where(html[data-material="mica"] *));
 @custom-variant vibrancy (&:where(html[data-material="vibrancy"] *));
 

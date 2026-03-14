@@ -1,4 +1,5 @@
 @reference "tailwindcss";
+@layer properties，theme, base, components, utilities;
 
 @layer components {
   *[data-component="icon"] {
