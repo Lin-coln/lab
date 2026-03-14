@@ -1,7 +1,6 @@
 @reference "tailwindcss";
-@layer properties，theme, base, components, utilities;
 
-@layer components {
+@layer base {
   [data-component="popover-panel"] {
     @apply text-base;
     /*@apply bg-[#29292b];*/

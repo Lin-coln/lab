@@ -1,7 +1,6 @@
 @reference "tailwindcss";
-@layer properties，theme, base, components, utilities;
 
-@layer components {
+@layer base {
   [data-component="tooltip-panel"] {
     @apply text-xs;
     /*@apply bg-[#29292b];*/

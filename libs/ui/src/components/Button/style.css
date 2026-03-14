@@ -1,7 +1,6 @@
 @reference "tailwindcss";
-@layer properties，theme, base, components, utilities;
 
-@layer components {
+@layer base {
   *[data-component="button"] {
     & {
       @apply relative inline-flex items-center justify-center gap-1;

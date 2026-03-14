@@ -1,7 +1,6 @@
 @reference "tailwindcss";
-@layer properties，theme, base, components, utilities;
 
-@layer components {
+@layer base {
   *[data-component="icon"] {
     @apply size-[1.25em];
     @apply grow-0 shrink-0;
