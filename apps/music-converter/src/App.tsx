@@ -59,7 +59,7 @@ export default function App() {
               variant="subtle"
               icon={<FaPlus size={16} className="mx-1" />}
               label={<div>select files</div>}
-              className={["text-neutral-50/70!", "w-32! h-12! rounded-2xl!"]}
+              className={["text-neutral-50/70", "w-32 h-12 rounded-2xl"]}
               onClick={() => {
                 filePicker.open();
               }}
