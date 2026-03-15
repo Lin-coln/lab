@@ -1,0 +1,30 @@
+@reference "tailwindcss";
+
+@layer base {
+  [data-component="chat-message"] {
+    @apply flex flex-col gap-1 pb-4;
+
+    & > [data-slot="thinking"] {
+      @apply px-2 py-0;
+      @apply text-xs text-white/40;
+      @apply max-w-full overflow-hidden text-wrap break-all;
+    }
+
+    & > [data-slot="tool_calls"] {
+      @apply bg-[#ffffff19] px-4 py-3;
+      @apply text-base text-white/80;
+      @apply w-fit self-start rounded-xl;
+      @apply max-w-full overflow-hidden text-wrap break-all;
+    }
+
+    & > [data-slot="toolbar"] {
+      @apply transition-opacity opacity-0;
+      @apply flex flex-row items-center gap-1;
+      @apply mx-1 text-white/60 justify-end;
+
+      &:where(*:hover > &) {
+        @apply opacity-100;
+      }
+    }
+  }
+}

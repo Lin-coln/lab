@@ -1,10 +1,11 @@
 {
+  "files": [],
   "references": [
-    { "path": "./scripts/tsconfig.json" },
-    { "path": "./shared/tsconfig.json" },
-    { "path": "./src/preload/tsconfig.json" },
-    { "path": "./src/renderer/tsconfig.json" },
-    { "path": "./src/services/tsconfig.json" },
-    { "path": "./src/tsconfig.json" }
+    {
+      "path": "./scripts/tsconfig.json"
+    },
+    {
+      "path": "./src/tsconfig.json"
+    }
   ]
 }

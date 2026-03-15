@@ -1,9 +1,0 @@
-{
-  "extends": "utils/tsconfig.browser.json",
-  "compilerOptions": {
-    "paths": {
-      "@shared/*": ["./*", "./*/index.ts"]
-    }
-  },
-  "references": [{ "path": "./electron/tsconfig.json" }]
-}

@@ -1,9 +1,0 @@
-{
-  "extends": "utils/tsconfig.browser.json",
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./*", "./*/index.ts"],
-      "@shared/*": ["../../shared/*", "../../shared/*/index.ts", "../../shared/*/index.tsx"]
-    }
-  }
-}
