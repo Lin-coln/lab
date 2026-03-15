@@ -10,10 +10,18 @@ await Bun.build({
   target: "browser",
   format: "esm",
   sourcemap: "external",
-  minify: false,
+  minify: env("prod"),
+  splitting: true,
   plugins: [tailwind],
   naming: {
     entry: "[dir]/[name].[ext]",
     chunk: "chunks/[name]-[hash].[ext]",
   },
 });
+
+function env(env: "prod" | "dev"): boolean {
+  return {
+    prod: process.env.NODE_ENV === "production",
+    dev: process.env.NODE_ENV === "development",
+  }[env];
+}

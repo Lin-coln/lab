@@ -1,6 +1,6 @@
-import tailwind from "bun-plugin-tailwind";
 import fs from "node:fs";
 import html from "./bun-plugin-html";
+import tailwind from "bun-plugin-tailwind";
 
 const dist = "dist";
 await fs.promises.rm(dist, { recursive: true, force: true });
@@ -11,7 +11,8 @@ await Bun.build({
   target: "browser",
   format: "esm",
   sourcemap: "external",
-  minify: false,
+  minify: env("prod"),
+  splitting: true,
   plugins: [tailwind, html],
   naming: {
     entry: "[dir]/[name].[ext]",
@@ -19,10 +20,9 @@ await Bun.build({
   },
 });
 
-// csp: {
-//   "img-src": [
-//     // image
-//     "http://p3.music.126.net/",
-//     "http://p4.music.126.net/",
-//   ],
-// },
+function env(env: "prod" | "dev"): boolean {
+  return {
+    prod: process.env.NODE_ENV === "production",
+    dev: process.env.NODE_ENV === "development",
+  }[env];
+}
