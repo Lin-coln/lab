@@ -25,6 +25,7 @@ export function injectDefaultStyles() {
     @layer base {
       *:where([data-platform="darwin"] *) {
         --safe-area-left: 88px;
+        --safe-area-top: 64px;
       }
     }
     `;
