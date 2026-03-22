@@ -24,6 +24,20 @@
         "@types/yauzl": "^2.10.3",
       },
     },
+    "apps/fx": {
+      "name": "fx",
+      "dependencies": {
+        "clsx": "catalog:",
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "ui": "catalog:",
+        "valtio": "catalog:",
+      },
+      "devDependencies": {
+        "bun-plugin-tailwind": "catalog:",
+        "tailwindcss": "catalog:",
+      },
+    },
     "apps/music-converter": {
       "name": "music-converter",
       "dependencies": {
@@ -258,6 +272,8 @@
     "fill-range": ["fill-range@7.1.1", "https://registry.npmmirror.com/fill-range/-/fill-range-7.1.1.tgz", { "dependencies": { "to-regex-range": "^5.0.1" } }, "sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg=="],
 
     "fs-extra": ["fs-extra@8.1.0", "https://registry.npmmirror.com/fs-extra/-/fs-extra-8.1.0.tgz", { "dependencies": { "graceful-fs": "^4.2.0", "jsonfile": "^4.0.0", "universalify": "^0.1.0" } }, "sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g=="],
+
+    "fx": ["fx@workspace:apps/fx"],
 
     "get-east-asian-width": ["get-east-asian-width@1.5.0", "https://registry.npmmirror.com/get-east-asian-width/-/get-east-asian-width-1.5.0.tgz", {}, "sha512-CQ+bEO+Tva/qlmw24dCejulK5pMzVnUOFOijVogd3KQs07HnRIgp8TGipvCCRT06xeYEbpbgwaCxglFyiuIcmA=="],
 

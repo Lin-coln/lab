@@ -1,0 +1,20 @@
+{
+  "name": "fx",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun run scripts/build",
+    "dev": "bun run scripts/dev"
+  },
+  "dependencies": {
+    "clsx": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "ui": "catalog:",
+    "valtio": "catalog:"
+  },
+  "devDependencies": {
+    "bun-plugin-tailwind": "catalog:",
+    "tailwindcss": "catalog:"
+  }
+}
