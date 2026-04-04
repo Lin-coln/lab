@@ -1,7 +1,7 @@
 import path from "node:path";
 import fs from "node:fs";
 import { net, app, session, type Session, type LoadExtensionOptions, type Extension } from "electron";
-import type { Readable } from "stream";
+import type { Readable } from "node:stream";
 import type { Entry, ZipFile } from "yauzl";
 import { pipeline } from "node:stream/promises";
 
@@ -181,7 +181,7 @@ async function unzipCrx(filename: string, outDir: string) {
   async function createZip(buf: Buffer): Promise<ZipFile> {
     const { fromBuffer } = await import("yauzl");
     return await new Promise((resolve, reject) => {
-      fromBuffer(buf, { lazyEntries: true }, (err, data) => void (err ? reject(err) : resolve(data)));
+      fromBuffer(buf, { lazyEntries: true }, (err, data) => (err ? reject(err) : resolve(data)));
     });
   }
 

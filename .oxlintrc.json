@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error"
+  },
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  },
+  "plugins": ["unicorn", "oxc", "typescript", "eslint", "import", "node"],
+  "ignorePatterns": ["node_modules", "dist", "build"],
+  "rules": {
+    "no-unused-vars": "allow",
+    "no-floating-promises": "allow",
+    "no-unused-expressions": "allow",
+    "no-async-promise-executor": "allow",
+    "no-useless-fallback-in-spread": "allow",
+    "no-redundant-type-constituents": "allow"
+  }
+}

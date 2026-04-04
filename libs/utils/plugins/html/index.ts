@@ -1,4 +1,4 @@
-import { applyCSP, type CSPOptions } from "./csp.ts";
+import { applyCSP, type CSPOptions } from "./csp";
 
 export function html(opts?: { csp?: CSPOptions }) {
   const csp = opts?.csp ?? null;

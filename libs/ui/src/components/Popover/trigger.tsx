@@ -1,7 +1,7 @@
 import { cloneElement, type ReactElement } from "react";
 import { Button, type ButtonProps } from "../Button";
-import { usePopoverContext } from "./context.tsx";
-import { useForkRef } from "../../utils/refs.ts";
+import { usePopoverContext } from "./context";
+import { useForkRef } from "../../utils/refs";
 
 export type PopoverTriggerProps = (ButtonProps & { as: "Button" }) | { children: ReactElement };
 

@@ -1,7 +1,7 @@
+import "./style.css";
 import { type ReactNode, type Ref, type MouseEvent, isValidElement, cloneElement } from "react";
 import cx, { type ClassValue } from "clsx";
-import "./style.css";
-import { toDataAttrs } from "../../utils/dataAttrs.ts";
+import { toDataAttrs } from "../../utils/dataAttrs";
 
 export interface ButtonProps {
   ref?: Ref<HTMLButtonElement>;
@@ -23,6 +23,7 @@ export function Button(props: ButtonProps) {
     <button
       ref={props.ref}
       disabled={disabled}
+      className={cx([props.className])}
       {...toDataAttrs({
         component: "button",
         disabled,
@@ -34,7 +35,6 @@ export function Button(props: ButtonProps) {
           props.onClick?.(e);
         }
       }}
-      className={cx([props.className])}
     >
       {props.icon}
       {labelNode &&

@@ -1,11 +1,11 @@
-import { Popover } from "./popover.tsx";
-import { PopoverContent } from "./content.tsx";
-import { PopoverTrigger } from "./trigger.tsx";
+import { Popover } from "./popover";
+import { PopoverContent } from "./content";
+import { PopoverTrigger } from "./trigger";
 
-export { type PopoverContext, usePopoverContext } from "./context.tsx";
-export type { PopoverProps } from "./popover.tsx";
-export type { PopoverTriggerProps } from "./trigger.tsx";
-export type { PopoverContentProps } from "./content.tsx";
+export { type PopoverContext, usePopoverContext } from "./context";
+export type { PopoverProps } from "./popover";
+export type { PopoverTriggerProps } from "./trigger";
+export type { PopoverContentProps } from "./content";
 
 const PopoverFinal = Object.assign(Popover, {
   Trigger: PopoverTrigger,

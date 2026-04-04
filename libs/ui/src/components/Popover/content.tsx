@@ -1,10 +1,10 @@
 import { cloneElement, type HTMLAttributes, type ReactElement, type ReactNode, type Ref } from "react";
 import { FloatingFocusManager, FloatingPortal } from "@floating-ui/react";
-import { usePopoverContext } from "./context.tsx";
+import { usePopoverContext } from "./context";
 import cx, { type ClassValue } from "clsx";
 import "./styles.css";
-import { useForkRef } from "../../utils/refs.ts";
-import { toDataAttrs } from "../../utils/dataAttrs.ts";
+import { useForkRef } from "../../utils/refs";
+import { toDataAttrs } from "../../utils/dataAttrs";
 
 export type PopoverContentProps = (DefaultPanelProps & { as: "panel" }) | { children: ReactElement };
 

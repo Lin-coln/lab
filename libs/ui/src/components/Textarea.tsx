@@ -1,6 +1,6 @@
 import cx, { type ClassValue } from "clsx";
 import { type Ref, type KeyboardEvent, useRef, type TextareaHTMLAttributes, useState, type CSSProperties } from "react";
-import { useForkRef } from "../utils/refs.ts";
+import { useForkRef } from "../utils/refs";
 
 Textarea.Base = Base;
 

@@ -3,7 +3,7 @@ import { app } from "electron";
 import { channel, platform } from "@/constants";
 import { BrowserWindowHelpers } from "./BrowserWindowHelpers";
 import { WebContentsHelpers } from "./WebContentsHelpers";
-import { ExtensionHelper } from "./ExtensionHelper.ts";
+import { ExtensionHelper } from "./ExtensionHelper";
 
 export const win = /* @__PURE__ */ new BrowserWindowHelpers();
 export const wc = /* @__PURE__ */ new WebContentsHelpers();

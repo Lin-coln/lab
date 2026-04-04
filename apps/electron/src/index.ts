@@ -1,5 +1,5 @@
 import { app, nativeTheme } from "electron";
-import { createMainWindow } from "@/windows/mainWindow.ts";
+import { createMainWindow } from "@/windows/mainWindow";
 import { ext, initializeHelpers } from "@/helpers";
 
 void main();

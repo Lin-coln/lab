@@ -1,5 +1,5 @@
 import cx, { type ClassValue } from "clsx";
-import { toDataAttrs } from "../utils/dataAttrs.ts";
+import { toDataAttrs } from "../utils/dataAttrs";
 
 export function Copy(props: { className?: ClassValue }) {
   return (

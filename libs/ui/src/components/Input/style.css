@@ -1,0 +1,34 @@
+@reference "tailwindcss";
+
+@layer base {
+  *[data-component="input"] {
+    & {
+      @apply rounded-md outline-none;
+      @apply w-52 h-8 py-1 px-2;
+      @apply bg-[#ffffff0f] hover:bg-[#ffffff19];
+    }
+
+    & {
+      @apply relative inline-flex items-center justify-center gap-1;
+      @apply overflow-hidden outline-none border-none cursor-pointer;
+      @apply transition-colors;
+
+      --stroke-color: #ffffff0a;
+      box-shadow:
+        inset 0 0 0 1px var(--stroke-color),
+        0 0 0 2px transparent;
+    }
+
+    &:hover {
+      --stroke-color: #ffffff19;
+    }
+
+    &:focus {
+      --stroke-color: #ffffffea;
+    }
+
+    &[data-disabled] {
+      @apply cursor-default opacity-30;
+    }
+  }
+}

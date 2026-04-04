@@ -12,8 +12,8 @@ import {
   useHover,
   FloatingPortal,
 } from "@floating-ui/react";
-import { useForkRef } from "../../utils/refs.ts";
-import { toDataAttrs } from "../../utils/dataAttrs.ts";
+import { useForkRef } from "../../utils/refs";
+import { toDataAttrs } from "../../utils/dataAttrs";
 import "./styles.css";
 
 export interface TooltipProps {

@@ -11,7 +11,7 @@ import {
   useRole,
   type Placement,
 } from "@floating-ui/react";
-import { Context, type PopoverContext } from "./context.tsx";
+import { Context, type PopoverContext } from "./context";
 
 export interface PopoverProps {
   open?: boolean;

@@ -1,4 +1,4 @@
-import { injectDefaultStyles } from "@/injectDefaultStyles.ts";
+import { injectDefaultStyles } from "@/injectDefaultStyles";
 
 window.addEventListener("DOMContentLoaded", (event) => {
   injectDefaultStyles();
