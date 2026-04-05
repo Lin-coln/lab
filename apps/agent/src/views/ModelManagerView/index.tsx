@@ -1,9 +1,9 @@
 import cx, { type ClassValue } from "clsx";
 import { useEffect, useState } from "react";
 import { ModelItem } from "./ModelItem";
-import { listModel } from "@/stores/model.ts";
+import { listModel } from "@/stores/model";
 import type { ModelInfo } from "@/types";
-import { setChatModel, useChatStore } from "@/stores/chat.ts";
+import { setChatModel, useChatStore } from "@/stores/chat";
 
 export function ModelManagerView(props: { className?: ClassValue }) {
   const [list, setList] = useState<ModelInfo[]>([]);

@@ -1,5 +1,5 @@
 import { type Config, type Message as OllamaMessage, Ollama, type Tool } from "ollama";
-import type { MessageContext } from "./message.ts";
+import type { MessageContext } from "./message";
 import type { Message } from "@/types";
 
 interface ChatContext {

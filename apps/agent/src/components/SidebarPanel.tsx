@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { AnimatePresence, motion, type Transition } from "framer-motion";
 import cx from "clsx";
-import { BasePanel } from "./common.tsx";
+import { BasePanel } from "./common";
 import { Button } from "ui";
 import { XMark } from "ui/icons";
 

@@ -1,4 +1,4 @@
-import uuid from "./uuid.ts";
+import uuid from "./uuid";
 
 export default class PromiseHub {
   promises: Map<string, Promise<any>>;

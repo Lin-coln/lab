@@ -1,6 +1,6 @@
-import type { NodeServer } from "./NodeServer.ts";
+import type { NodeServer } from "./NodeServer";
 import type { Socket } from "node:net";
-import { withMiddleware } from "../utils/middleware.ts";
+import { withMiddleware } from "../utils/middleware";
 
 export default withMiddleware(
   write,

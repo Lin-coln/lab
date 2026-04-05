@@ -1,4 +1,4 @@
-import { authed } from "../auth/authed.ts";
+import { authed } from "../auth/authed";
 
 export const NAME = "/profile";
 

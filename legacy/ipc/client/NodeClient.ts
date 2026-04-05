@@ -1,12 +1,12 @@
-import { EventBus } from "../utils/event.ts";
-import type { Client as IClient, ClientEvents } from "../utils/types.ts";
-import QueueHub from "../utils/QueueHub.ts";
-import PromiseHub from "../utils/PromiseHub.ts";
+import { EventBus } from "../utils/event";
+import type { Client as IClient, ClientEvents } from "../utils/types";
+import QueueHub from "../utils/QueueHub";
+import PromiseHub from "../utils/PromiseHub";
 import { type IpcSocketConnectOpts, type SocketConstructorOpts, Socket } from "node:net";
-import { useBeforeMiddleware, withMiddleware } from "../utils/middleware.ts";
-import connect from "./connect.ts";
-import disconnect from "./disconnect.ts";
-import write from "./write.ts";
+import { useBeforeMiddleware, withMiddleware } from "../utils/middleware";
+import connect from "./connect";
+import disconnect from "./disconnect";
+import write from "./write";
 
 export class NodeClient extends EventBus<ClientEvents> implements IClient {
   queueHub: QueueHub;

@@ -1,5 +1,5 @@
 import type { BunRequest, RouterTypes, Server } from "bun";
-import { type AuthPayload, AuthService } from "./service.ts";
+import { type AuthPayload, AuthService } from "./service";
 
 export function authed<T extends string>(
   handler: (req: BunRequest<T> & { auth: AuthPayload }, server: Server) => Response | Promise<Response>,

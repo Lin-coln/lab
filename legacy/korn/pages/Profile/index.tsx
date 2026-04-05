@@ -1,9 +1,9 @@
 import { Button } from "ui";
-import { fetchProfile, signOut, useAccountStore } from "../stores/account.ts";
+import { fetchProfile, signOut, useAccountStore } from "../stores/account";
 import cx from "clsx";
 import { use, useEffect, useRef } from "react";
-import { bindVideoSource, createMediaSource, type Source } from "./mediaSource.ts";
-import { setVideo } from "./setVideo.ts";
+import { bindVideoSource, createMediaSource, type Source } from "./mediaSource";
+import { setVideo } from "./setVideo";
 
 const profilePromise = fetchProfile();
 

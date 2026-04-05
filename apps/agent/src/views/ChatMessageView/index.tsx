@@ -1,5 +1,5 @@
 import cx, { type ClassValue } from "clsx";
-import { useMessageStore } from "@/stores/message.ts";
+import { useMessageStore } from "@/stores/message";
 import { ChatMessage } from "@/components/ChatMessage";
 
 export function ChatMessageView(props: { className?: ClassValue }) {

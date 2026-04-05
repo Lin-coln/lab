@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { useViewStore } from "@/stores/view.tsx";
-import { chat, useChatStore } from "@/stores/chat.ts";
-import { BottomLayer, BottomPanel } from "@/components/BottomPanel.tsx";
+import { useViewStore } from "@/stores/view";
+import { chat, useChatStore } from "@/stores/chat";
+import { BottomLayer, BottomPanel } from "@/components/BottomPanel";
 import { Textarea } from "ui";
 import { ArrowUp } from "ui/icons";
 import { ToolButton, ToolSection } from "./ToolSection";
@@ -24,7 +24,7 @@ export function ChatBottomPanel() {
           className={["pt-4 px-4", "w-full max-h-[480px] overflow-y-auto", "bg-transparent"]}
           style={{ boxShadow: void 0 }}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && !Boolean(e.shiftKey)) {
+            if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
               sendButtonRef.current?.click();
             }

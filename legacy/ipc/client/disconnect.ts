@@ -1,5 +1,5 @@
-import type { NodeClient } from "./NodeClient.ts";
-import { useBeforeMiddleware, withMiddleware } from "../utils/middleware.ts";
+import type { NodeClient } from "./NodeClient";
+import { useBeforeMiddleware, withMiddleware } from "../utils/middleware";
 
 export default withMiddleware(
   withEmitDisconnect(disconnect),

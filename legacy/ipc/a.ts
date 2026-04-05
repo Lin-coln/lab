@@ -1,4 +1,4 @@
-import { createClient } from "./test.ts";
+import { createClient } from "./test";
 
 void main();
 async function main() {

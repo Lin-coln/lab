@@ -1,4 +1,4 @@
-import type { NodeClient } from "./NodeClient.ts";
+import type { NodeClient } from "./NodeClient";
 import type { Socket } from "node:net";
 
 export default write;

@@ -1,4 +1,4 @@
-import { createServer } from "./test.ts";
+import { createServer } from "./test";
 
 void main();
 async function main() {

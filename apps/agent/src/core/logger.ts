@@ -11,7 +11,7 @@ export class Logger {
 
   #lastChar: string | null = null;
   #write(str: string) {
-    if (!Boolean(typeof process !== "undefined" && process.stdout && process.stdout.write)) return;
+    if (!(typeof process !== "undefined" && process.stdout && process.stdout.write)) return;
 
     if (!str.length) return;
     this.#lastChar = str[str.length - 1]!;

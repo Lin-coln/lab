@@ -1,5 +1,5 @@
-import type { NodeServer } from "./NodeServer.ts";
-import { useBeforeMiddleware, withMiddleware } from "../utils/middleware.ts";
+import type { NodeServer } from "./NodeServer";
+import { useBeforeMiddleware, withMiddleware } from "../utils/middleware";
 
 export default withMiddleware(
   withEmitDisconnect(disconnect),

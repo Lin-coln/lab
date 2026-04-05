@@ -1,6 +1,6 @@
-import { Model } from "./model.ts";
-import { MessageContext } from "./message.ts";
-import { Functions } from "./functions.ts";
+import { Model } from "./model";
+import { MessageContext } from "./message";
+import { Functions } from "./functions";
 
 export class Agent {
   model: Model;
@@ -23,8 +23,8 @@ export class Agent {
         model,
         tools: [...this.functions.getTools()],
         messages: this.messageContext.messages,
-        createStream: this.messageContext.createStream,
-        upsertMessage: this.messageContext.upsert,
+        createStream: this.messageContext.createStream.bind(this.messageContext),
+        upsertMessage: this.messageContext.upsert.bind(this.messageContext),
       });
 
       // tool calls
@@ -35,8 +35,8 @@ export class Agent {
             await this.functions.call({
               name,
               args,
-              createStream: this.messageContext.createStream,
-              upsertMessage: this.messageContext.upsert,
+              createStream: this.messageContext.createStream.bind(this.messageContext),
+              upsertMessage: this.messageContext.upsert.bind(this.messageContext),
             });
           }),
         );

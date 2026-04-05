@@ -1,8 +1,8 @@
-import type { NodeClient } from "./NodeClient.ts";
+import type { NodeClient } from "./NodeClient";
 import type { IpcSocketConnectOpts, Socket } from "node:net";
-import { withEmitDisconnect } from "./disconnect.ts";
-import { useArgsMiddleware, useRetryMiddleware, withMiddleware } from "../utils/middleware.ts";
-import fixPipeName from "../utils/fixPipeName.ts";
+import { withEmitDisconnect } from "./disconnect";
+import { useArgsMiddleware, useRetryMiddleware, withMiddleware } from "../utils/middleware";
+import fixPipeName from "../utils/fixPipeName";
 
 export default withMiddleware(
   connect,

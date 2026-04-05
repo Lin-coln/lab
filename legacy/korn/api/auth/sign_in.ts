@@ -1,5 +1,5 @@
 import { type BunRequest } from "bun";
-import { AuthService } from "./service.ts";
+import { AuthService } from "./service";
 
 export const NAME = "/sign_in";
 

@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import type { InvokeRendererChannels } from "./common";
-import { type Args, type IpcChannels, type Promised, type Return, typed } from "./typed-ipc.ts";
+import { type Args, type IpcChannels, type Promised, type Return, typed } from "./typed-ipc";
 
 export type IpcRenderer<Channels extends IpcChannels> = ReturnType<typeof createIpcRenderer<Channels>>;
 export function createIpcRenderer<Channels extends IpcChannels>(namespace: string) {

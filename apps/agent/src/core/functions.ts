@@ -1,7 +1,7 @@
 import type { Tool, ToolCall } from "ollama";
 import type { ZodType } from "zod";
 import { type JsonSchema7ObjectType, zodToJsonSchema } from "zod-to-json-schema";
-import type { MessageContext } from "./message.ts";
+import type { MessageContext } from "./message";
 
 declare module "@/types" {
   export interface Message {

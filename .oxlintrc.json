@@ -8,7 +8,7 @@
     "typeCheck": true
   },
   "plugins": ["unicorn", "oxc", "typescript", "eslint", "import", "node"],
-  "ignorePatterns": ["node_modules", "dist", "build"],
+  "ignorePatterns": ["node_modules", "dist", "build", "legacy"],
   "rules": {
     "no-unused-vars": "allow",
     "no-floating-promises": "allow",

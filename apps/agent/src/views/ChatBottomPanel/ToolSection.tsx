@@ -1,10 +1,10 @@
 import cx from "clsx";
 import { type ReactNode } from "react";
-import { openSidebar } from "@/stores/view.tsx";
+import { openSidebar } from "@/stores/view";
 import { Bell, Brain } from "ui/icons";
 import { Button, type ButtonProps } from "ui";
-import { clearMessages } from "@/stores/message.ts";
-import { useChatStore } from "@/stores/chat.ts";
+import { clearMessages } from "@/stores/message";
+import { useChatStore } from "@/stores/chat";
 
 export function ToolSection(props: { children?: ReactNode }) {
   const chatStore = useChatStore();

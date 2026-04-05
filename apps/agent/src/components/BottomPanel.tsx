@@ -1,7 +1,7 @@
 import cx from "clsx";
 import { type ReactNode, useRef } from "react";
 import { AnimatePresence, motion, type Transition } from "framer-motion";
-import { BasePanel } from "./common.tsx";
+import { BasePanel } from "./common";
 
 export function BottomPanel(props: { children: ReactNode }) {
   return (

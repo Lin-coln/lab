@@ -1,1 +1,1 @@
-export * from "./NodeClient.ts";
+export * from "./NodeClient";

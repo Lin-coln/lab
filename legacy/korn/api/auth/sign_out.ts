@@ -1,4 +1,4 @@
-import { authed } from "./authed.ts";
+import { authed } from "./authed";
 
 export const NAME = "/sign_out";
 

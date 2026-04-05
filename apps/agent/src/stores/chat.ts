@@ -1,5 +1,5 @@
 import { proxy, useSnapshot } from "valtio";
-import { agent } from "./Runtime.ts";
+import { agent } from "./Runtime";
 
 interface ChatStore {
   model: string | null;

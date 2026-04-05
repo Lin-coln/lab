@@ -1,11 +1,11 @@
 import fs from "node:fs";
 import { type ListenOptions, type Server, type Socket } from "node:net";
-import uuid from "../utils/uuid.ts";
-import useCleanup from "../utils/useCleanup.ts";
-import type { NodeServer } from "./NodeServer.ts";
-import { withEmitClose } from "./close.ts";
-import { withEmitDisconnect } from "./disconnect.ts";
-import fixPipeName from "../utils/fixPipeName.ts";
+import uuid from "../utils/uuid";
+import useCleanup from "../utils/useCleanup";
+import type { NodeServer } from "./NodeServer";
+import { withEmitClose } from "./close";
+import { withEmitDisconnect } from "./disconnect";
+import fixPipeName from "../utils/fixPipeName";
 
 export default function (this: NodeServer, opts: ListenOptions) {
   let sockPath = opts.path;

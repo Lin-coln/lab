@@ -1,7 +1,7 @@
 import { Button, Input } from "ui";
 import cx from "clsx";
 import { useState } from "react";
-import { signIn } from "../stores/account.ts";
+import { signIn } from "../stores/account";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");

@@ -1,7 +1,7 @@
 import { proxy, useSnapshot } from "valtio";
 import { watch } from "valtio/utils";
-import { pushRoute } from "../routes.ts";
-import * as utils from "./utils.ts";
+import { pushRoute } from "../routes";
+import * as utils from "./utils";
 
 type AccountStore = {
   token: string;

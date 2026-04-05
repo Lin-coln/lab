@@ -1,4 +1,4 @@
-import type { IEvents } from "./event.ts";
+import type { IEvents } from "./event";
 
 export interface ServerEvents extends IEvents {
   error(err: Error): void;

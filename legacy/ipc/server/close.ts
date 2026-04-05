@@ -1,5 +1,5 @@
-import type { NodeServer } from "./NodeServer.ts";
-import { withMiddleware } from "../utils/middleware.ts";
+import type { NodeServer } from "./NodeServer";
+import { withMiddleware } from "../utils/middleware";
 
 export default withMiddleware(
   withEmitClose(close),

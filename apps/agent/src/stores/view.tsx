@@ -3,7 +3,7 @@ import type { ComponentType, LazyExoticComponent } from "react";
 import { ChatMessageView } from "@/views/ChatMessageView";
 import { ModelManagerView } from "@/views/ModelManagerView";
 
-type Component = LazyExoticComponent<ComponentType<any>> | ComponentType<any>;
+type Component = LazyExoticComponent<ComponentType> | ComponentType;
 type SidebarConfig =
   | { key: "message"; title: "Message"; component: Component }
   | { key: "models"; title: "Models"; component: Component };

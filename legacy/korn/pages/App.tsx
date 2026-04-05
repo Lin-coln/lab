@@ -1,6 +1,6 @@
 import { Suspense, type ReactNode } from "react";
 import cx from "clsx";
-import { routes, useHashRoute } from "./routes.ts";
+import { routes, useHashRoute } from "./routes";
 
 export default function App() {
   const route = useHashRoute();

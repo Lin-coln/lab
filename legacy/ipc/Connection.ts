@@ -1,7 +1,7 @@
-import { EventBus } from "./utils/event.ts";
+import { EventBus } from "./utils/event";
 import { NodeServer } from "./server";
 import { NodeClient } from "./client";
-import type { Client, Server } from "./utils/types.ts";
+import type { Client, Server } from "./utils/types";
 import type { IpcSocketConnectOpts, ListenOptions } from "node:net";
 
 class Node extends EventBus {

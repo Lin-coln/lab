@@ -2,7 +2,7 @@ import type { Snapshot } from "valtio";
 import type { Message, ToolCall } from "@/types";
 import cx from "clsx";
 import { MarkdownRenderer } from "./markdown";
-import { toDataAttrs } from "ui/utils/dataAttrs.ts";
+import { toDataAttrs } from "ui/utils/dataAttrs";
 import { Button, Tooltip } from "ui";
 import { Copy, Refresh } from "ui/icons";
 

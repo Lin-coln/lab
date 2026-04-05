@@ -1,5 +1,5 @@
 import type { RouterTypes } from "bun";
-import { toRouteEntries } from "./utils.ts";
+import { toRouteEntries } from "./utils";
 
 import * as auth from "./auth";
 import * as user from "./user";

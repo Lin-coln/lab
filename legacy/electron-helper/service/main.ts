@@ -1,6 +1,6 @@
 import { ipcMain, webContents, type IpcMainInvokeEvent, type IpcMainEvent } from "electron";
-import { type InvokeRendererChannels, uuid } from "./common.ts";
-import { type Args, type IpcChannels, type Promised, type Return, typed } from "./typed-ipc.ts";
+import { type InvokeRendererChannels, uuid } from "./common";
+import { type Args, type IpcChannels, type Promised, type Return, typed } from "./typed-ipc";
 
 export type IpcMain<Channels extends IpcChannels> = ReturnType<typeof createIpcMain<Channels>>;
 export function createIpcMain<Channels extends IpcChannels>(namespace: string) {

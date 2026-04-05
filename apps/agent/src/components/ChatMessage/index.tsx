@@ -1,8 +1,8 @@
 import type { Snapshot } from "valtio";
 import type { Message } from "@/types";
-import { ContentSection, ThinkingSection, ToolbarSection, ToolCallsSection } from "./sections.tsx";
+import { ContentSection, ThinkingSection, ToolbarSection, ToolCallsSection } from "./sections";
 import "./styles.css";
-import { toDataAttrs } from "ui/utils/dataAttrs.ts";
+import { toDataAttrs } from "ui/utils/dataAttrs";
 
 export function ChatMessage(props: { message: Snapshot<Message> }) {
   const { message } = props;

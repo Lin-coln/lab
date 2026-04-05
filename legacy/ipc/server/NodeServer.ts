@@ -1,14 +1,14 @@
 import { Server, Socket, type ServerOpts, type ListenOptions } from "node:net";
-import type { Server as IServer, ServerEvents } from "../utils/types.ts";
-import { EventBus } from "../utils/event.ts";
-import { useBeforeMiddleware, withMiddleware } from "../utils/middleware.ts";
+import type { Server as IServer, ServerEvents } from "../utils/types";
+import { EventBus } from "../utils/event";
+import { useBeforeMiddleware, withMiddleware } from "../utils/middleware";
 
-import listen from "./listen.ts";
-import close from "./close.ts";
-import disconnect from "./disconnect.ts";
-import write from "./write.ts";
-import PromiseHub from "../utils/PromiseHub.ts";
-import QueueHub from "../utils/QueueHub.ts";
+import listen from "./listen";
+import close from "./close";
+import disconnect from "./disconnect";
+import write from "./write";
+import PromiseHub from "../utils/PromiseHub";
+import QueueHub from "../utils/QueueHub";
 
 export class NodeServer extends EventBus<ServerEvents> implements IServer {
   queueHub: QueueHub;
