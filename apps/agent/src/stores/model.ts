@@ -1,4 +1,4 @@
-import type { ModelInfo } from "@/types";
+import type { ModelInfo } from "cc/core";
 
 import ollama from "ollama";
 

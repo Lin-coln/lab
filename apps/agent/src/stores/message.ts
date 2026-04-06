@@ -1,6 +1,6 @@
-import type { Message } from "@/types";
+import type { Message } from "cc/core";
 import { proxy, useSnapshot } from "valtio";
-import { MessageContext } from "@/core";
+import { MessageContext } from "cc/core";
 import { agent } from "./Runtime";
 
 interface MessageStore {

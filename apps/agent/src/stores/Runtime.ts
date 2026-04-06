@@ -1,4 +1,4 @@
-import { Agent } from "@/core";
+import { Agent } from "cc/core";
 import z from "zod";
 
 const systemPrompt = `# TOOL USE

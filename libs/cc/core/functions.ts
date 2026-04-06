@@ -3,7 +3,7 @@ import type { ZodType } from "zod";
 import { type JsonSchema7ObjectType, zodToJsonSchema } from "zod-to-json-schema";
 import type { MessageContext } from "./message";
 
-declare module "@/types" {
+declare module "./types" {
   export interface Message {
     tool_calls?: ToolCall[];
     tool_name?: string;

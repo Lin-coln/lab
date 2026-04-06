@@ -7,10 +7,11 @@
     "dev": "bun run scripts/dev"
   },
   "dependencies": {
+    "cc": "catalog:",
     "clsx": "catalog:",
     "framer-motion": "^12.23.12",
     "markdown-it": "^14.1.0",
-    "ollama": "^0.5.17",
+    "ollama": "^0.6.3",
     "react": "catalog:",
     "react-dom": "catalog:",
     "ui": "catalog:",

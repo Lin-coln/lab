@@ -1,4 +1,4 @@
-import type { Message } from "@/types";
+import type { Message } from "./types";
 
 type LooseFields = "id" | "created_at";
 type LooseMessage = Omit<Message, LooseFields> & Partial<Pick<Message, LooseFields>>;

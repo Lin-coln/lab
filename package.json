@@ -16,8 +16,9 @@
       "react": "^19.0.0",
       "react-dom": "^19.0.0",
       "tailwindcss": "^4.1.12",
+      "valtio": "^2.1.7",
       "ui": "workspace:*",
-      "valtio": "^2.1.7"
+      "cc": "workspace:*"
     }
   },
   "type": "module",

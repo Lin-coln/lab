@@ -1,5 +1,5 @@
 import type { Snapshot } from "valtio";
-import type { Message } from "@/types";
+import type { Message } from "cc/core";
 import { ContentSection, ThinkingSection, ToolbarSection, ToolCallsSection } from "./sections";
 import "./styles.css";
 import { toDataAttrs } from "ui/utils/dataAttrs";

@@ -1,5 +1,5 @@
 import type { Snapshot } from "valtio";
-import type { Message, ToolCall } from "@/types";
+import type { Message, ToolCall } from "cc/core";
 import cx from "clsx";
 import { MarkdownRenderer } from "./markdown";
 import { toDataAttrs } from "ui/utils/dataAttrs";
