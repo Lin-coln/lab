@@ -1,6 +1,5 @@
-import type { Tool, ToolCall } from "ollama";
-import type { ZodType } from "zod";
-import { type JsonSchema7ObjectType, zodToJsonSchema } from "zod-to-json-schema";
+import type { Tool } from "ollama";
+import { type ZodType, toJSONSchema } from "zod";
 import type { MessageContext } from "./message";
 
 declare module "./types" {
@@ -33,16 +32,16 @@ export class Functions {
   }
 
   add<T>(opts: { name: string; description: string; schema: ZodType<T>; handler: (params: T) => Promise<any> }) {
-    const jsonSchema = zodToJsonSchema(opts.schema) as JsonSchema7ObjectType;
+    const schema = toJSONSchema(opts.schema);
     const tool: Tool = {
       type: "function",
       function: {
         name: opts.name,
         description: opts.description,
         parameters: {
-          type: jsonSchema.type,
-          properties: jsonSchema.properties,
-          required: jsonSchema.required,
+          type: schema.type,
+          properties: schema.properties as any,
+          required: schema.required,
         },
       },
     };

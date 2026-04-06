@@ -7,7 +7,6 @@
   },
   "peerDependencies": {
     "ollama": "^0.6.3",
-    "zod": "^3",
-    "zod-to-json-schema": "^3.24.6"
+    "zod": "^4"
   }
 }
