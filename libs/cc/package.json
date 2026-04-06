@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./core": "./core/index.ts"
+    "./core": "./legacy/index.ts"
   },
   "peerDependencies": {
     "ollama": "^0.6.3",
