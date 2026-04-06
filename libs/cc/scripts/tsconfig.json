@@ -1,3 +1,4 @@
 {
-  "extends": "utils/tsconfig.bun.json"
+  "extends": "utils/tsconfig.bun.json",
+  "include": [".", "../src"]
 }
