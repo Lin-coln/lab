@@ -53,11 +53,11 @@ async function promiseLogMessage(stream: Stream<Message.StreamEvent>, logger: Lo
       if (evt.content) {
         logger.model.content(evt.content);
       }
-      if (evt.thinking) {
-        logger.model.thinking(evt.thinking);
+      if (evt.reasoning) {
+        logger.model.reasoning(evt.reasoning);
       }
     }
-    if (evt.type === "message_stop") {
+    if (evt.type === "message_finish") {
       logger.model.stop();
       return;
     }

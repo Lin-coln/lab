@@ -58,13 +58,13 @@ async function promiseUpsertMessage(ctx: Message.Context, stream: Stream<Message
         msg.content += evt.content;
       }
 
-      if (evt.thinking) {
-        msg.thinking ??= "";
-        msg.thinking += evt.thinking;
+      if (evt.reasoning) {
+        msg.reasoning ??= "";
+        msg.reasoning += evt.reasoning;
       }
     }
 
-    if (evt.type === "message_stop") {
+    if (evt.type === "message_finish") {
       return await ctx.upsert(msg, meta);
     }
   }
@@ -80,11 +80,11 @@ function resolveMergedMessage(prev: Message | void, next: Partial<Message>): Mes
   }
 
   const content = next.content ?? prev?.content ?? "";
-  const thinking = next.thinking ?? prev?.thinking;
+  const reasoning = next.reasoning ?? prev?.reasoning;
 
   return {
     role,
     content,
-    ...(thinking ? { thinking } : {}),
+    ...(reasoning ? { reasoning } : {}),
   };
 }

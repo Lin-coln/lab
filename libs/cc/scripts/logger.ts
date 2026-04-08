@@ -4,7 +4,7 @@ type LogLevel = "info" | "warn" | "error";
 
 export type Logger = Record<LogLevel, (...data: any[]) => void> & {
   user: RoleLogger;
-  model: RoleLogger<{ thinking: 0; content: 0 }>;
+  model: RoleLogger<{ reasoning: 0; content: 0 }>;
 };
 
 type RoleLogger<T extends Record<string, any> | void = void> = {
@@ -29,7 +29,7 @@ export function createLogger(): Logger {
     model: createRoleLogger(
       { prefix: "model:", c: chalk.hex("#006721") },
       {
-        thinking: { prefix: "model(thinking):", c: chalk.dim.white },
+        reasoning: { prefix: "model(reasoning):", c: chalk.dim.white },
         content: {},
       },
     ),

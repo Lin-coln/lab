@@ -25,6 +25,7 @@ export interface Tool {
 export namespace Tool {
   export interface Call {
     id: string;
+    type: string;
     function: {
       name: string;
       arguments: {

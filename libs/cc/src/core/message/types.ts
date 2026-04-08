@@ -1,7 +1,7 @@
 export interface Message {
   role: string;
   content: string;
-  thinking?: string;
+  reasoning?: string;
 }
 
 export namespace Message {
@@ -10,7 +10,7 @@ export namespace Message {
     created_at: number;
   }
 
-  export type StreamEvent = StreamEvent.MessageStart | StreamEvent.MessageChunk | StreamEvent.MessageStop;
+  export type StreamEvent = StreamEvent.MessageStart | StreamEvent.MessageChunk | StreamEvent.MessageFinish;
   export namespace StreamEvent {
     export interface MessageStart {
       type: "message_start";
@@ -23,11 +23,12 @@ export namespace Message {
     export interface MessageChunk {
       type: "message_chunk";
       content?: string;
-      thinking?: string;
+      reasoning?: string;
     }
 
-    export interface MessageStop {
-      type: "message_stop";
+    export interface MessageFinish {
+      type: "message_finish";
+      reason: string;
     }
   }
 }

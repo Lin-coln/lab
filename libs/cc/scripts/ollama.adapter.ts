@@ -45,11 +45,11 @@ function createStreamFromOllamaIterable(iterable: AbortableAsyncIterator<ChatRes
         }
 
         if (msg.thinking) {
-          yield { type: "message_chunk", thinking: msg.thinking };
+          yield { type: "message_chunk", reasoning: msg.thinking };
         }
 
         if (resp.done) {
-          yield { type: "message_stop" };
+          yield { type: "message_finish", reason: resp.done_reason };
         }
       }
     },
