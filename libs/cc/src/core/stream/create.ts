@@ -1,10 +1,11 @@
 import { create, type StreamOptions } from "./base";
 
-export function createStreamFromIterator<T>(iterator: AsyncIterator<T>, opts: StreamOptions) {
+export function createStreamFromIterator<T>(iterator: () => AsyncIterator<T>, opts: StreamOptions) {
+  const it = iterator();
   return createStreamFromIterable(
     {
       [Symbol.asyncIterator]() {
-        return iterator;
+        return it;
       },
     },
     opts,

@@ -35,20 +35,23 @@ export function createMessageContext(): Message.Context {
 
       return [next, metadata] as [Message, Message.Metadata];
     },
-    upsertFromStream(stream: Stream<Message.StreamEvent>) {
-      return promiseUpsertMessage(this, stream);
+    async upsertFromStream(stream: Stream<Message.StreamEvent>) {
+      const [msg, meta] = await resolveMessageFromStream(stream);
+      return await this.upsert(msg, meta);
     },
   };
 }
 
-async function promiseUpsertMessage(ctx: Message.Context, stream: Stream<Message.StreamEvent>) {
+async function resolveMessageFromStream(stream: Stream<Message.StreamEvent>) {
   let msg: Message | null = null;
   let meta: Message.Metadata | null = null;
+
   for await (const evt of stream) {
     if (evt.type === "message_start") {
       meta = { id: evt.id, created_at: evt.created_at };
       msg = { role: evt.role, content: evt.content };
     }
+
     if (!msg || !meta) {
       throw new Error("Failed to update message");
     }
@@ -62,14 +65,22 @@ async function promiseUpsertMessage(ctx: Message.Context, stream: Stream<Message
         msg.reasoning ??= "";
         msg.reasoning += evt.reasoning;
       }
+
+      if (evt.tool_calls) {
+        msg.tool_calls = evt.tool_calls;
+      }
     }
 
     if (evt.type === "message_finish") {
-      return await ctx.upsert(msg, meta);
+      break;
     }
   }
 
-  throw new Error("Failed to update message");
+  if (!msg || !meta) {
+    throw new Error("Failed to resolve message from stream");
+  }
+
+  return [msg, meta] as const;
 }
 
 function resolveMergedMessage(prev: Message | void, next: Partial<Message>): Message {
@@ -81,10 +92,12 @@ function resolveMergedMessage(prev: Message | void, next: Partial<Message>): Mes
 
   const content = next.content ?? prev?.content ?? "";
   const reasoning = next.reasoning ?? prev?.reasoning;
+  const tool_calls = next.tool_calls ?? prev?.tool_calls;
 
   return {
     role,
     content,
     ...(reasoning ? { reasoning } : {}),
+    ...(tool_calls ? { tool_calls } : {}),
   };
 }

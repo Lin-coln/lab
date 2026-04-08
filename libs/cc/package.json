@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./core": "./legacy/index.ts"
+    "./core": "./legacy/index.ts",
+    "./ollama.adapter": "./scripts/ollama.adapter.ts",
+    ".": "./src/index.ts"
   },
   "scripts": {
     "cli": "bun run scripts/cli.ts"
