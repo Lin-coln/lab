@@ -1,4 +1,4 @@
-import { createStreamFromIterator, type Message, type Stream } from "../src/core";
+import { createStreamFromIterator, type Message, type Stream } from "@/core";
 import { type AbortableAsyncIterator, type ChatResponse, Ollama } from "ollama";
 
 export function createAdapter() {
@@ -8,11 +8,11 @@ export function createAdapter() {
     createMessageStream,
   };
 
-  async function createMessageStream(opts: { messages: Message[] }) {
+  async function createMessageStream(opts: { model: string; messages: Message[] }) {
     const iterable = await ollama.chat({
       stream: true,
       think: true,
-      model: "qwen3:4b",
+      model: opts.model,
       messages: opts.messages,
     });
     return createStreamFromOllamaIterable(iterable);

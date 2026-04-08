@@ -1,11 +1,13 @@
-import type { Message } from "@/core";
+import type { Message, Stream } from "@/core";
 
-declare module "./types" {
+declare module "@/core" {
   export namespace Message {
     export interface Context {
       resolveMessages(): Promise<Message[]>;
 
       upsert(msg: Partial<Message>, meta: { id: string; created_at?: number }): Promise<[Message, Message.Metadata]>;
+
+      upsertFromStream(stream: Stream<Message.StreamEvent>): Promise<[Message, Message.Metadata]>;
     }
   }
 }
@@ -31,9 +33,43 @@ export function createMessageContext(): Message.Context {
       const next: Message = resolveMergedMessage(map.get(id), msg);
       map.set(id, next);
 
-      return [next, metadata];
+      return [next, metadata] as [Message, Message.Metadata];
+    },
+    upsertFromStream(stream: Stream<Message.StreamEvent>) {
+      return promiseUpsertMessage(this, stream);
     },
   };
+}
+
+async function promiseUpsertMessage(ctx: Message.Context, stream: Stream<Message.StreamEvent>) {
+  let msg: Message | null = null;
+  let meta: Message.Metadata | null = null;
+  for await (const evt of stream) {
+    if (evt.type === "message_start") {
+      meta = { id: evt.id, created_at: evt.created_at };
+      msg = { role: evt.role, content: evt.content };
+    }
+    if (!msg || !meta) {
+      throw new Error("Failed to update message");
+    }
+
+    if (evt.type === "message_chunk") {
+      if (evt.content) {
+        msg.content += evt.content;
+      }
+
+      if (evt.thinking) {
+        msg.thinking ??= "";
+        msg.thinking += evt.thinking;
+      }
+    }
+
+    if (evt.type === "message_stop") {
+      return await ctx.upsert(msg, meta);
+    }
+  }
+
+  throw new Error("Failed to update message");
 }
 
 function resolveMergedMessage(prev: Message | void, next: Partial<Message>): Message {
