@@ -28,7 +28,7 @@ export namespace Tool {
   }
 }
 
-declare module "@/core" {
+declare module "../../core" {
   interface Message {
     tool_call_id?: string;
     tool_calls?: Tool.Call[];

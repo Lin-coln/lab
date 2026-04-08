@@ -1,5 +1,13 @@
 import { proxy, useSnapshot } from "valtio";
-import { agent } from "./Runtime";
+import { createRuntime } from "./Runtime";
+import { messageStore } from "@/stores/message";
+
+const runtime = createRuntime((msg, meta) => {
+  messageStore.messages[meta.id] = {
+    ...structuredClone(msg),
+    metadata: structuredClone(meta),
+  };
+});
 
 interface ChatStore {
   model: string | null;
@@ -8,19 +16,14 @@ interface ChatStore {
 const chatStore = proxy<ChatStore>({
   model: null,
 });
-agent.model_name = chatStore.model;
+
 export const useChatStore = () => useSnapshot(chatStore);
 
 export async function setChatModel(model: string | null) {
-  agent.model_name = model;
+  // agent.model_name = model;
   chatStore.model = model;
 }
 
 export async function chat(userInput: string) {
-  if (agent.messageContext.messages.every((x) => x.role !== "system")) {
-    // agent.messageContext.upsert({ role: "system", content: systemPrompt, created_at: 0 });
-  }
-
-  agent.messageContext.upsert({ role: "user", content: userInput });
-  await agent.chat();
+  await runtime.chat(userInput);
 }

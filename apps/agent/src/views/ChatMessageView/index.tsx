@@ -7,7 +7,7 @@ export function ChatMessageView(props: { className?: ClassValue }) {
   return (
     <div className={cx([props.className])}>
       {Object.values(messageStore.messages)
-        .sort((a, b) => a.created_at - b.created_at)
+        .sort((a, b) => a.metadata.created_at - b.metadata.created_at)
         .map((message, i) => (
           <ChatMessage key={i} message={message} />
         ))}

@@ -1,5 +1,5 @@
 import cx from "clsx";
-import type { ModelInfo } from "cc/core";
+import type { ModelInfo } from "cc/legacy";
 
 export function ModelItem(props: { model: ModelInfo; isSelected: boolean; onClick: (model: ModelInfo) => void }) {
   const { model, isSelected, onClick } = props;

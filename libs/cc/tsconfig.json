@@ -6,9 +6,6 @@
     },
     {
       "path": "./src/tsconfig.json"
-    },
-    {
-      "path": "./legacy/tsconfig.json"
     }
   ]
 }

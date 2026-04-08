@@ -1,7 +1,7 @@
 import type { Tool } from "@/core";
 import { type ZodType, toJSONSchema } from "zod";
 
-declare module "@/core" {
+declare module "../core" {
   export namespace Tool {
     export interface Context {
       resolveTools(): Promise<Tool[]>;

@@ -1,5 +1,5 @@
 import type { Snapshot } from "valtio";
-import type { Message } from "cc/core";
+import type { Message } from "cc";
 import { ContentSection, ThinkingSection, ToolbarSection, ToolCallsSection } from "./sections";
 import "./styles.css";
 import { toDataAttrs } from "ui/utils/dataAttrs";
@@ -14,7 +14,7 @@ export function ChatMessage(props: { message: Snapshot<Message> }) {
         console.log(JSON.parse(JSON.stringify(message)));
       }}
     >
-      {message.thinking && <ThinkingSection message={message} />}
+      {message.reasoning && <ThinkingSection message={message} />}
       {message.tool_calls?.length && <ToolCallsSection message={message} />}
       {message.content && <ContentSection message={message} />}
       <ToolbarSection message={message} />

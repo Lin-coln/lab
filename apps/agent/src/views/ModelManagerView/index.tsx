@@ -2,7 +2,7 @@ import cx, { type ClassValue } from "clsx";
 import { useEffect, useState } from "react";
 import { ModelItem } from "./ModelItem";
 import { listModel } from "@/stores/model";
-import type { ModelInfo } from "cc/core";
+import type { ModelInfo } from "cc/legacy";
 import { setChatModel, useChatStore } from "@/stores/chat";
 
 export function ModelManagerView(props: { className?: ClassValue }) {

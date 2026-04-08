@@ -1,5 +1,5 @@
 import type { Snapshot } from "valtio";
-import type { Message, ToolCall } from "cc/core";
+import type { Message, Tool } from "cc";
 import cx from "clsx";
 import { MarkdownRenderer } from "./markdown";
 import { toDataAttrs } from "ui/utils/dataAttrs";
@@ -10,13 +10,13 @@ export function ThinkingSection(props: { message: Snapshot<Message> }) {
   return (
     <div {...toDataAttrs({ slot: "thinking" })} className={cx("mb-1")}>
       <div className="mb-1">thinking:</div>
-      <div>{props.message.thinking}</div>
+      <div>{props.message.reasoning}</div>
     </div>
   );
 }
 
 export function ToolCallsSection(props: { message: Snapshot<Message> }) {
-  const renderCall = (x: ToolCall, i: number) => {
+  const renderCall = (x: Tool.Call, i: number) => {
     return (
       <div
         key={i}

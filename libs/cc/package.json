@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./core": "./legacy/index.ts",
+    "./legacy": "./scripts/legacy.ts",
     "./ollama.adapter": "./scripts/ollama.adapter.ts",
     ".": "./src/index.ts"
   },

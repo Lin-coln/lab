@@ -1,6 +1,6 @@
 import type { Message, Stream } from "@/core";
 
-declare module "@/core" {
+declare module "../core" {
   export namespace Message {
     export interface Context {
       resolveMessages(): Promise<Message[]>;

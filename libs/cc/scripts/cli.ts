@@ -31,7 +31,7 @@ async function createRuntime() {
   const ctx$tool: Tool.Context = createToolContext();
 
   await loadTools(ctx$tool);
-  const adapter = createAdapter();
+  const adapter = createAdapter(() => Bun.randomUUIDv7());
 
   return {
     async chat(input: string) {

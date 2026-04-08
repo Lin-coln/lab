@@ -8,7 +8,7 @@ declare module "ollama" {
   }
 }
 
-export function createAdapter() {
+export function createAdapter(uuid: () => string) {
   const ollama = new Ollama();
 
   return {
@@ -24,11 +24,14 @@ export function createAdapter() {
       ...(opts.tools ? { tools: structuredClone(opts.tools) } : {}),
     });
 
-    return createStreamFromOllamaIterable(iterable);
+    return createStreamFromOllamaIterable(iterable, uuid);
   }
 }
 
-function createStreamFromOllamaIterable(iterable: AbortableAsyncIterator<ChatResponse>): Stream<Message.StreamEvent> {
+function createStreamFromOllamaIterable(
+  iterable: AbortableAsyncIterator<ChatResponse>,
+  uuid: () => string,
+): Stream<Message.StreamEvent> {
   const controller = new AbortController();
   controller.signal.addEventListener("abort", () => iterable.abort());
 
@@ -39,7 +42,7 @@ function createStreamFromOllamaIterable(iterable: AbortableAsyncIterator<ChatRes
         const msg = resp.message;
 
         if (!id) {
-          id = Bun.randomUUIDv7();
+          id = uuid();
           yield {
             type: "message_start",
             id,
