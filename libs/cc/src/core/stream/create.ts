@@ -1,14 +1,20 @@
-import type { Stream } from "@/core";
-import { tee } from "./tee";
+import { create, type StreamOptions } from "./base";
 
-type StreamOptions = {
-  controller: AbortController; // abort
-};
+export function createStreamFromIterator<T>(iterator: AsyncIterator<T>, opts: StreamOptions) {
+  return createStreamFromIterable(
+    {
+      [Symbol.asyncIterator]() {
+        return iterator;
+      },
+    },
+    opts,
+  );
+}
 
 export function createStreamFromIterable<T>(iterable: AsyncIterable<T>, opts: StreamOptions) {
   let consumed = false;
   const { controller } = opts;
-  return createStreamFromIterator(async function* (): AsyncIterator<T, any, undefined> {
+  return create(async function* (): AsyncIterator<T, any, undefined> {
     if (consumed) {
       throw new Error(`Cannot iterate over a consumed stream`);
     }
@@ -26,18 +32,6 @@ export function createStreamFromIterable<T>(iterable: AsyncIterable<T>, opts: St
       if (!done) controller.abort();
     }
   }, opts);
-}
-
-export function createStreamFromIterator<T>(iterator: () => AsyncIterator<T>, opts: StreamOptions): Stream<T> {
-  return {
-    controller: opts.controller,
-    [Symbol.asyncIterator](): AsyncIterator<T> {
-      return iterator();
-    },
-    tee() {
-      return tee(this);
-    },
-  };
 }
 
 function isAbortError(err: unknown) {

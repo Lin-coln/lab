@@ -1,7 +1,22 @@
 import type { Stream } from "@/core";
-import { createStreamFromIterator } from "@/core";
 
-export function tee<T>(src: Stream<T>): [Stream<T>, Stream<T>] {
+export type StreamOptions = {
+  controller: AbortController; // abort
+};
+
+export function create<T>(iterator: () => AsyncIterator<T>, opts: StreamOptions): Stream<T> {
+  return {
+    controller: opts.controller,
+    [Symbol.asyncIterator](): AsyncIterator<T> {
+      return iterator();
+    },
+    tee() {
+      return tee(this);
+    },
+  };
+}
+
+function tee<T>(src: Stream<T>): [Stream<T>, Stream<T>] {
   const left: Promise<IteratorResult<T>>[] = [];
   const right: Promise<IteratorResult<T>>[] = [];
   const iterator = src[Symbol.asyncIterator]();
@@ -9,8 +24,8 @@ export function tee<T>(src: Stream<T>): [Stream<T>, Stream<T>] {
     controller: src.controller,
   };
   return [
-    createStreamFromIterator(() => teeIterator(left), opts), // left
-    createStreamFromIterator(() => teeIterator(right), opts), // right
+    create(() => teeIterator(left), opts), // left
+    create(() => teeIterator(right), opts), // right
   ];
 
   function teeIterator(queue: Promise<IteratorResult<T>>[]): AsyncIterator<T> {
