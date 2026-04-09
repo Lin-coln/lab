@@ -1,9 +1,0 @@
-{
-  "extends": "utils/tsconfig.browser.json",
-  "include": [".", "../shared"],
-  "compilerOptions": {
-    "paths": {
-      "@shared": ["../shared"]
-    }
-  }
-}
