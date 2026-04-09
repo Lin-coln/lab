@@ -13,9 +13,6 @@
     "./react": "./react/index.tsx",
     ".": "./src/index.ts"
   },
-  "dependencies": {
-    "commander": "^14.0.2"
-  },
   "peerDependencies": {
     "react": "catalog:",
     "tailwindcss": "catalog:"

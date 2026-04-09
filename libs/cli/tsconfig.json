@@ -1,0 +1,8 @@
+{
+  "extends": "utils/tsconfig.bun.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*", "./*/index.ts"]
+    }
+  }
+}
