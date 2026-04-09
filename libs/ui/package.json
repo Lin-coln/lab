@@ -15,10 +15,10 @@
       "require": "./src/index.ts"
     },
     "./utils/*": {
-      "types": "./src/utils/*",
-      "bun": "./src/utils/*",
-      "import": "./src/utils/*",
-      "require": "./src/utils/*"
+      "types": "./src/utils/*.ts",
+      "bun": "./src/utils/*.ts",
+      "import": "./src/utils/*.ts",
+      "require": "./src/utils/*.ts"
     },
     "./icons": {
       "types": "./src/icons/index.ts",

@@ -1,0 +1,8 @@
+{
+  "extends": "utils/tsconfig.common.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*", "./*/index.ts"]
+    }
+  }
+}

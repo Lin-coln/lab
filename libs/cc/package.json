@@ -1,0 +1,21 @@
+{
+  "name": "cc",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./legacy": "./scripts/legacy.ts",
+    "./ollama.adapter": "./scripts/ollama.adapter.ts",
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "cli": "bun run scripts/cli.ts"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "chalk": "catalog:"
+  },
+  "peerDependencies": {
+    "ollama": "^0.6.3",
+    "zod": "^4"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "cli",
+  "private": true,
+  "bin": {
+    "uxu": "uxu.ts"
+  },
+  "type": "module",
+  "devDependencies": {
+    "chalk": "catalog:",
+    "commander": "^14.0.2"
+  }
+}
