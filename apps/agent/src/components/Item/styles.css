@@ -1,0 +1,71 @@
+@reference "tailwindcss";
+
+@layer base {
+  [data-component="history-item"] {
+    @apply flex flex-col py-1 rounded-sm mb-1;
+
+    /* hover */
+    @apply relative;
+
+    &::after {
+      @apply absolute top-0 left-0 block w-full h-full pointer-events-none;
+      @apply content-[''];
+      @apply transition-opacity opacity-0;
+      @apply bg-[#ffffff09];
+    }
+
+    &:where(&:hover, &:active)::after {
+      @apply opacity-100;
+    }
+
+    &[data-type="reasoning"] {
+      @apply px-2;
+      @apply text-xs text-white/40;
+      @apply max-w-full overflow-hidden text-wrap break-all;
+    }
+
+    &[data-type="tool_call"] {
+      @apply px-2;
+      @apply text-xs text-white/60;
+      @apply max-w-full overflow-hidden text-wrap break-all;
+    }
+
+    &[data-type="message"] {
+      @apply flex flex-col gap-1;
+      @apply px-2;
+      @apply text-sm text-white/80;
+      @apply max-w-full overflow-hidden text-wrap break-all;
+
+      &[data-role="system"] {
+        @apply text-xs text-white/40;
+      }
+
+      &[data-role="assistant"] {
+        @apply p-2;
+      }
+
+      &[data-role="user"] {
+        @apply items-end;
+
+        & > [data-slot="content"] {
+          @apply w-fit rounded-xl;
+          @apply bg-[#ffffff19] px-3 py-2;
+        }
+
+        &::after {
+          @apply bg-transparent;
+        }
+      }
+
+      & > [data-slot="toolbar"] {
+        @apply transition-opacity opacity-0;
+        @apply flex flex-row items-center gap-1;
+        @apply text-white/60 justify-end;
+
+        &:where(*:hover > &) {
+          @apply opacity-100;
+        }
+      }
+    }
+  }
+}

@@ -1,16 +1,16 @@
 import { ChatMessageView } from "@/views/ChatMessageView";
 import cx from "clsx";
-import { type ComponentType, type ReactNode, useEffect } from "react";
-import { useMessageStore } from "@/stores/message";
+import { useEffect } from "react";
 import { closeSidebar, useViewStore } from "@/stores/view";
 import { SidebarLayer, SidebarPanel } from "@/components/SidebarPanel";
 import { ChatBottomPanel } from "@/views/ChatBottomPanel";
+import { useChatStore } from "@/stores/chat";
 
 export default function App() {
-  const messageStore = useMessageStore();
+  const chatStore = useChatStore();
   useEffect(() => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-  }, [messageStore.messages]);
+  }, [chatStore.items]);
 
   return (
     <>

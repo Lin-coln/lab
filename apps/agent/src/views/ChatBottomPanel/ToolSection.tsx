@@ -3,15 +3,14 @@ import { type ReactNode } from "react";
 import { openSidebar } from "@/stores/view";
 import { Bell, Brain } from "ui/icons";
 import { Button, type ButtonProps } from "ui";
-import { clearMessages } from "@/stores/message";
-import { useChatStore } from "@/stores/chat";
+import { clearHistory, useChatStore } from "@/stores/chat";
 
 export function ToolSection(props: { children?: ReactNode }) {
   const chatStore = useChatStore();
   const modelLabel = chatStore.model ?? "none";
 
   const handleClear = async () => {
-    await clearMessages();
+    await clearHistory();
   };
   return (
     <div className={cx("p-3", "flex flex-row items-center gap-2")}>

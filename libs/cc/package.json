@@ -4,7 +4,7 @@
   "type": "module",
   "exports": {
     "./legacy": "./scripts/legacy.ts",
-    "./ollama.adapter": "./scripts/ollama.adapter.ts",
+    "./lms.adapter": "./adapter/lms.adapter.ts",
     ".": "./src/index.ts"
   },
   "scripts": {
@@ -15,7 +15,6 @@
     "chalk": "catalog:"
   },
   "peerDependencies": {
-    "ollama": "^0.6.3",
     "zod": "^4"
   }
 }

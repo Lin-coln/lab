@@ -1,16 +1,20 @@
 import cx, { type ClassValue } from "clsx";
-import { useMessageStore } from "@/stores/message";
-import { ChatMessage } from "@/components/ChatMessage";
+import { useChatStore } from "@/stores/chat";
+import { MessageItem, ReasoningItem, ToolCallItem } from "@/components/Item";
 
 export function ChatMessageView(props: { className?: ClassValue }) {
-  const messageStore = useMessageStore();
+  const chatStore = useChatStore();
   return (
     <div className={cx([props.className])}>
-      {Object.values(messageStore.messages)
-        .sort((a, b) => a.metadata.created_at - b.metadata.created_at)
-        .map((message, i) => (
-          <ChatMessage key={i} message={message} />
-        ))}
+      {chatStore.items.map((item, i) => {
+        if (item.type == "reasoning") {
+          return <ReasoningItem key={i} item={item} />;
+        } else if (item.type == "message") {
+          return <MessageItem item={item} />;
+        } else if (item.type == "tool_call") {
+          return <ToolCallItem key={i} item={item} />;
+        }
+      })}
     </div>
   );
 }

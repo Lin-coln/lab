@@ -1,6 +1,6 @@
 import z from "zod";
-import { createMessageContext, createToolContext, type Message, type Tool } from "cc";
-import { createAdapter } from "cc/ollama.adapter";
+import { createItemContext, createToolContext, type Item, type StreamEvent, teeAsyncIterable, type Tool } from "cc";
+import { createAdapter } from "cc/lms.adapter";
 
 const systemPrompt = `# TOOL USE
 
@@ -18,11 +18,11 @@ tool use.
 
 thinking in chinese, don't thinking too long`;
 
-export function createRuntime(onUpsert: (msg: Message, meta: Message.Metadata) => void) {
-  const ctx$msg: Message.Context = createMessageContext();
+export function createRuntime(onUpsert: (item: Item) => void) {
+  const adapter = createAdapter();
+  const ctx$item = createItemContext();
   const ctx$tool: Tool.Context = createToolContext();
 
-  // await loadTools(ctx$tool);
   ctx$tool.add({
     name: "get_current_weather",
     description: "Get the current weather for a city",
@@ -34,65 +34,63 @@ export function createRuntime(onUpsert: (msg: Message, meta: Message.Metadata) =
     },
   });
 
-  const adapter = createAdapter(uuid);
-
   return {
     async chat(input: string) {
-      await ctx$msg.upsert({ role: "user", content: input }, { id: uuid() }).then(([msg, meta]) => onUpsert(msg, meta));
-      await handleReAct();
       try {
+        await ctx$item.insert({ type: "message", role: "user", content: input }).then(onUpsert);
+        while (true) {
+          const iterable = await handleChatWithModel();
+          const called = await handleToolCall(iterable);
+          if (called) continue;
+          break;
+        }
       } catch (e) {
         console.error(`[ERROR]\n\n${e as any}\n`);
       }
     },
   };
 
-  async function handleReAct() {
-    while (true) {
-      // todo compact
-
-      const { upsertPromise, stream } = await handleChatWithModel();
-
-      await Promise.all([upsertPromise, Promise.resolve()]);
-
-      const [msg] = await upsertPromise;
-
-      if (msg.tool_calls?.length) {
-        await handleToolCalls(msg.tool_calls);
-        continue;
-      }
-
-      break;
-    }
-  }
-
   async function handleChatWithModel() {
-    const stream0 = await adapter.createMessageStream({
-      model: "qwen3:4b",
-      messages: await ctx$msg.resolveMessages(),
+    const iterable = await adapter.createResponse({
+      model: "qwen3.5-9b-mlx",
+      input: [
+        { type: "message", role: "system", content: systemPrompt },
+        ...(await ctx$item.resolveItems()), //
+      ],
       tools: await ctx$tool.resolveTools(),
     });
 
-    const [stream1, stream2] = stream0.tee();
-
-    const upsertPromise = ctx$msg.upsertFromStream(stream1).then(([msg, meta]) => {
-      onUpsert(msg, meta);
-      return [msg, meta] as const;
-    });
-
-    return { stream: stream2, upsertPromise };
+    const [iterable0, iterable1] = teeAsyncIterable(iterable);
+    const [iterable2, iterable3] = teeAsyncIterable(iterable1);
+    await Promise.all([ctx$item.insertFromStreamEvents(iterable2), promiseUpsert(iterable3)]);
+    return iterable0;
   }
 
-  async function handleToolCalls(tool_calls: Tool.Call[]) {
-    for (const call of tool_calls) {
-      const name = call.function.name;
-      const args = call.function.arguments;
-      console.log(`[tool::${name}] ${args}`);
-      const content = await ctx$tool.call(name, args);
-      await ctx$msg
-        .upsert({ role: "tool", tool_call_id: call.id, content }, { id: uuid() })
-        .then(([msg, meta]) => onUpsert(msg, meta));
-      console.log(`[tool::${name}] \n${args}`);
+  async function handleToolCall(iterable: AsyncIterable<StreamEvent>) {
+    let hasToolCalls = false;
+    for await (const event of iterable) {
+      if (event.type !== "response.output_item.done") continue;
+      if (event.item.type !== "tool_call") continue;
+
+      hasToolCalls = true;
+
+      const call = event.item;
+      console.log(`[tool::${call.name}] ${call.arguments}`);
+      const output = await ctx$tool.call(call.name, call.arguments);
+      console.log(`[tool::${call.name}] \n${output}`);
+
+      await ctx$item.insert({ type: "tool_call_output", call_id: call.call_id, output }).then(onUpsert);
+    }
+
+    return hasToolCalls;
+  }
+
+  async function promiseUpsert(iterable: AsyncIterable<StreamEvent>) {
+    for await (const event of iterable) {
+      if (event.type === "response.output_item.done") {
+        // event.item_index; event.item;
+        onUpsert(event.item);
+      }
     }
   }
 }

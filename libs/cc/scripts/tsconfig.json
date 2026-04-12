@@ -1,9 +1,9 @@
 {
   "extends": "utils/tsconfig.bun.json",
-  "include": [".", "../src"],
   "compilerOptions": {
     "paths": {
-      "@/*": ["../src/*", "../src/*/index.ts"]
+      "cc/lms.adapter.ts": ["../adapter/lms.adapter.ts"],
+      "cc": ["../src/index.ts"]
     }
   }
 }
