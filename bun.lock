@@ -46,20 +46,6 @@
         "@types/yauzl": "^2.10.3",
       },
     },
-    "apps/fx": {
-      "name": "fx",
-      "dependencies": {
-        "clsx": "catalog:",
-        "react": "catalog:",
-        "react-dom": "catalog:",
-        "ui": "catalog:",
-        "valtio": "catalog:",
-      },
-      "devDependencies": {
-        "bun-plugin-tailwind": "catalog:",
-        "tailwindcss": "catalog:",
-      },
-    },
     "apps/music-converter": {
       "name": "music-converter",
       "dependencies": {
@@ -384,8 +370,6 @@
     "framer-motion": ["framer-motion@12.38.0", "https://registry.npmmirror.com/framer-motion/-/framer-motion-12.38.0.tgz", { "dependencies": { "motion-dom": "^12.38.0", "motion-utils": "^12.36.0", "tslib": "^2.4.0" }, "peerDependencies": { "@emotion/is-prop-valid": "*", "react": "^18.0.0 || ^19.0.0", "react-dom": "^18.0.0 || ^19.0.0" }, "optionalPeers": ["@emotion/is-prop-valid", "react", "react-dom"] }, "sha512-rFYkY/pigbcswl1XQSb7q424kSTQ8q6eAC+YUsSKooHQYuLdzdHjrt6uxUC+PRAO++q5IS7+TamgIw1AphxR+g=="],
 
     "fs-extra": ["fs-extra@8.1.0", "http://registry.npm.taobao.org/fs-extra/-/fs-extra-8.1.0.tgz", { "dependencies": { "graceful-fs": "^4.2.0", "jsonfile": "^4.0.0", "universalify": "^0.1.0" } }, "sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g=="],
-
-    "fx": ["fx@workspace:apps/fx"],
 
     "get-east-asian-width": ["get-east-asian-width@1.5.0", "http://registry.npm.taobao.org/get-east-asian-width/-/get-east-asian-width-1.5.0.tgz", {}, "sha512-CQ+bEO+Tva/qlmw24dCejulK5pMzVnUOFOijVogd3KQs07HnRIgp8TGipvCCRT06xeYEbpbgwaCxglFyiuIcmA=="],
 
