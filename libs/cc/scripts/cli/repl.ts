@@ -1,35 +1,40 @@
 import readline from "node:readline";
 import chalk, { type ChalkInstance } from "chalk";
-import type { StreamEvent } from "cc";
+import { type AOP, createFunction, type StreamEvent } from "cc";
 
 export type Flag = void | "exit" | "continue";
 
 export type UI = ReturnType<typeof createUI>;
 
-export function createREPL(
-  onLoop: (input: string) => Promise<Flag>,
-  opts: {
-    onInterrupt: () => void;
-  },
-) {
+export function createREPL(onLoop: (input: string) => Promise<Flag>, opts: { onInterrupt: () => void }) {
   let sigintCount = 0;
   let loopRunning = false;
 
   const ui = createUI();
+  const cmd = createCommandContext();
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   rl.on("SIGINT", handleSIGINT);
+
+  const handleLoop = createFunction(onLoop)
+    .use(cmd.mw)
+    .catch((err: any) => {
+      if (err.name !== "AbortError" && err.message?.includes("aborted")) {
+        ui.error(err.message);
+      }
+    });
 
   return {
     start,
     exit,
     ui,
+    cmd: cmd.add.bind(cmd),
     renderStream: (s: AsyncIterable<StreamEvent>) => renderStream(ui, s),
   };
 
   async function start() {
     while (true) {
       const input: string = await new Promise<string>((resolve) => {
-        ui.write("> ");
+        ui.write(chalk.hex("#006721")("> "));
         rl.once("line", (line) => resolve(line));
       });
       if (!input) continue;
@@ -37,14 +42,8 @@ export function createREPL(
 
       try {
         loopRunning = true;
-        const flag = await onLoop(input);
+        const flag = await handleLoop(input);
         if (flag === "exit") break;
-      } catch (err: any) {
-        if (err.name !== "AbortError" && err.message?.includes("aborted")) {
-          ui.error(err.message);
-          continue;
-        }
-        throw err;
       } finally {
         loopRunning = false;
       }
@@ -66,7 +65,6 @@ export function createREPL(
     sigintCount++;
     if (sigintCount < 2) {
       ui.info("Press Ctrl+C again to exit.");
-      ui.write("> ");
       return;
     }
 
@@ -84,20 +82,44 @@ function createUI() {
     // write
     write,
   };
-
   function log(c: ChalkInstance | null, ...data: any[]) {
     if (needRet) write("\n");
-
     if (!c) {
       console.log(...data);
     } else {
       console.log(...data.map((x) => (typeof x === "string" ? c(x) : x)));
     }
   }
-
   function write(str: string) {
     needRet = !str.endsWith("\n");
     process.stdout.write(str);
+  }
+}
+
+function createCommandContext() {
+  const commands = new Map<string, (input: string) => Flag | Promise<Flag>>();
+  const mw: AOP.MW<[string], Flag> = (next, input) => {
+    const [name, args] = resolveFromInput(input);
+    if (!name) return next(input);
+    return commands.get(name)!(args);
+  };
+
+  return { add, mw };
+
+  function add(data: Record<string, (input: string) => Flag | Promise<Flag>>) {
+    Object.entries(data).forEach(([name, handle]) => {
+      commands.set(name, handle);
+    });
+  }
+
+  function resolveFromInput(input: string) {
+    const regex = /^\/([a-z][a-z0-9_]*)(?:\s+(.*))?$/;
+    const match = regex.exec(input);
+    if (!match) return [];
+    const name = match[1]!;
+    const args = match[2] ?? "";
+    if (!commands.has(name)) return [];
+    return [name, args] as const;
   }
 }
 

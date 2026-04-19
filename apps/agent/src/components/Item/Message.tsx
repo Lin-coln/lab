@@ -40,7 +40,7 @@ function ToolbarSection(props: { item: Snapshot<Item> }) {
   const { item } = props;
 
   const handleCopy = () => {
-    console.log(item);
+    // console.log(item);
   };
 
   return (

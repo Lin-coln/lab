@@ -18,7 +18,7 @@ export function SidebarPanel(props: { title: string; onClose: () => unknown; chi
           onClick={() => props.onClose()}
         />
       </div>
-      <div className={cx("px-4 py-2", "h-full overflow-y-auto")}>{props.children}</div>
+      <div className={cx("px-4 pt-2 pb-4", "h-full overflow-y-auto")}>{props.children}</div>
     </BasePanel>
   );
 }

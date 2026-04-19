@@ -1,17 +1,8 @@
-import { createREPL, type Flag, type UI } from "./repl";
-import {
-  createAOP,
-  createFunction,
-  createItemContext,
-  createToolContext,
-  type Item,
-  type StreamEvent,
-  teeAsyncIterable,
-  type Tool,
-} from "cc";
+import { createREPL, type Flag } from "./repl";
+import { createChatAPI, createItemContext, createToolContext, type StreamEvent, teeAsyncIterable } from "cc";
 import { createAdapter } from "cc/lms.adapter";
-import bash from "../tools/bash";
 import chalk from "chalk";
+import bash from "../tools/bash";
 
 const adapter = createAdapter();
 const ctx$item = createItemContext();
@@ -29,27 +20,26 @@ const chat = createChatAPI(async (signal) =>
     signal,
   }),
 );
-const onLoop = createFunction(async (input: string): Promise<Flag> => {
-  await ctx$item.insert({ type: "message", role: "user", content: input });
-  // ReAct
-  while (true) {
-    const s = await chat();
-    const called = await handleToolCall(s);
-    if (called) continue;
-    break;
-  }
-  // await chat();
-});
-const repl = createREPL(onLoop, {
-  onInterrupt() {
-    chat.abort();
+const repl = createREPL(
+  async (input: string): Promise<Flag> => {
+    await ctx$item.insert({ type: "message", role: "user", content: input });
+    // ReAct
+    while (true) {
+      const s = await chat();
+      const called = await handleToolCall(s);
+      if (called) continue;
+      break;
+    }
+    // await chat();
   },
-});
-// aop
-onLoop.use(async (next, input) => {
-  if (["/exit", "/quit"].includes(input)) return "exit";
-  return next(input);
-});
+  {
+    onInterrupt() {
+      chat.abort();
+      repl.ui.info("interrupted");
+    },
+  },
+);
+repl.cmd({ exit: () => "exit" });
 chat.hook(repl.renderStream, (s) => ctx$item.insertFromStreamEvents(s));
 await repl.start();
 
@@ -70,50 +60,4 @@ async function handleToolCall(iterable: AsyncIterable<StreamEvent>) {
   }
 
   return hasToolCalls;
-}
-
-function createChatAPI(onChat: (signal: AbortSignal) => Promise<AsyncIterable<StreamEvent>>) {
-  type Stream = AsyncIterable<StreamEvent>;
-  type ChatAPI = {
-    (): Promise<Stream>;
-    abort(): void;
-    hook(...hooks: ((s: Stream) => unknown)[]): ChatAPI;
-  };
-  return createAOP<ChatAPI, [], Stream>((ctx) => {
-    let abortController: AbortController | null = null;
-    const fn = async () => {
-      abortController = new AbortController();
-      return await onChat(abortController.signal).finally(() => {
-        abortController = null;
-      });
-    };
-
-    return Object.assign(() => ctx.wrap(fn)(), {
-      hook,
-      abort() {
-        abortController?.abort();
-      },
-    });
-
-    function hook(this: ChatAPI, ...hooks: ((s: Stream) => unknown)[]) {
-      if (!hooks.length) return this;
-
-      ctx.use(async (next) => {
-        let s0 = await next();
-        let s1: Stream;
-        let s2: Stream;
-        [s0, s1] = teeAsyncIterable(s0);
-        await Promise.all(
-          hooks.map((hook, i, arr) => {
-            if (i === arr.length - 1) return hook(s1);
-            [s1, s2] = teeAsyncIterable(s1);
-            return hook(s2);
-          }),
-        );
-        return s0;
-      });
-
-      return this;
-    }
-  });
 }

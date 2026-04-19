@@ -1,5 +1,13 @@
 import z from "zod";
-import { createItemContext, createToolContext, type Item, type StreamEvent, teeAsyncIterable, type Tool } from "cc";
+import {
+  type Content,
+  createChatAPI,
+  createItemContext,
+  createToolContext,
+  type Item,
+  type StreamEvent,
+  type Tool,
+} from "cc";
 import { createAdapter } from "cc/lms.adapter";
 
 const systemPrompt = `# TOOL USE
@@ -18,7 +26,7 @@ tool use.
 
 thinking in chinese, don't thinking too long`;
 
-export function createRuntime(onUpsert: (item: Item) => void) {
+export function createRuntime(onUpsert: (data: Item | ((prev: Item[]) => void | [Item, number])) => number) {
   const adapter = createAdapter();
   const ctx$item = createItemContext();
   const ctx$tool: Tool.Context = createToolContext();
@@ -34,13 +42,30 @@ export function createRuntime(onUpsert: (item: Item) => void) {
     },
   });
 
+  const chat = createChatAPI(async (signal) =>
+    adapter.createResponse({
+      model: "google/gemma-4-e4b",
+      input: [
+        { type: "message", role: "system", content: systemPrompt },
+        ...(await ctx$item.resolveItems()), //
+      ],
+      tools: await ctx$tool.resolveTools(),
+      signal,
+    }),
+  );
+
+  chat.hook(
+    (s) => ctx$item.insertFromStreamEvents(s),
+    (s) => promiseUpsert(s),
+  );
+
   return {
     async chat(input: string) {
       try {
         await ctx$item.insert({ type: "message", role: "user", content: input }).then(onUpsert);
         while (true) {
-          const iterable = await handleChatWithModel();
-          const called = await handleToolCall(iterable);
+          const s = await chat();
+          const called = await handleToolCall(s);
           if (called) continue;
           break;
         }
@@ -49,23 +74,6 @@ export function createRuntime(onUpsert: (item: Item) => void) {
       }
     },
   };
-
-  async function handleChatWithModel() {
-    const iterable = await adapter.createResponse({
-      model: "qwen3.5-9b-mlx",
-      input: [
-        { type: "message", role: "system", content: systemPrompt },
-        ...(await ctx$item.resolveItems()), //
-      ],
-      tools: await ctx$tool.resolveTools(),
-      signal: new AbortController().signal,
-    });
-
-    const [iterable0, iterable1] = teeAsyncIterable(iterable);
-    const [iterable2, iterable3] = teeAsyncIterable(iterable1);
-    await Promise.all([ctx$item.insertFromStreamEvents(iterable2), promiseUpsert(iterable3)]);
-    return iterable0;
-  }
 
   async function handleToolCall(iterable: AsyncIterable<StreamEvent>) {
     let hasToolCalls = false;
@@ -87,19 +95,52 @@ export function createRuntime(onUpsert: (item: Item) => void) {
   }
 
   async function promiseUpsert(iterable: AsyncIterable<StreamEvent>) {
+    let index: number = -1;
+    let item: Item | null = null;
+    let item_index: number = -1;
+    let part_index: number = -1;
+
     for await (const event of iterable) {
+      handleOutputItem(event);
+      handleContentPart(event);
+    }
+
+    function handleOutputItem(event: StreamEvent) {
+      if (event.type === "response.output_item.added") {
+        index = onUpsert(event.item);
+        item = event.item;
+        item_index = event.item_index;
+      }
       if (event.type === "response.output_item.done") {
-        // event.item_index; event.item;
-        onUpsert(event.item);
+        if (event.item_index !== item_index) return;
+        item = event.item;
+        onUpsert(() => [item!, index]);
+      }
+      if (event.type === "response.delta.tool_call_arguments") {
+        if (event.item_index !== item_index) return;
+        (item as any).arguments += event.delta;
+      }
+    }
+
+    function handleContentPart(event: StreamEvent) {
+      if (event.type === "response.content_part.added") {
+        if (event.item_index !== item_index) return;
+        (item as any).content.push(event.part);
+        onUpsert(() => [item!, index]);
+        part_index = event.part_index;
+      }
+      if (event.type === "response.content_part.done") {
+        if (event.item_index !== item_index) return;
+        if (event.part_index !== part_index) return;
+        (item as any).content[part_index] = event.part;
+        onUpsert(() => [item!, index]);
+      }
+      if (event.type === "response.delta.content_part.text") {
+        if (event.item_index !== item_index) return;
+        if (event.part_index !== part_index) return;
+        ((item as any).content[part_index] as Content.Text).text += event.delta;
+        onUpsert(() => [item!, index]);
       }
     }
   }
-}
-
-function uuid(): string {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0;
-    const v = c === "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
 }

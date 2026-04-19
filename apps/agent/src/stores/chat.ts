@@ -8,13 +8,22 @@ interface ChatStore {
 }
 
 const chatStore = proxy<ChatStore>({
-  // model: null,
   model: "qwen3.5-9b-mlx",
   items: [],
 });
 
 const runtime = createRuntime((item) => {
-  chatStore.items = [...chatStore.items, structuredClone(item)];
+  if (typeof item !== "function") {
+    chatStore.items = [...chatStore.items, structuredClone(item)];
+    return chatStore.items.length - 1;
+  }
+
+  const [next, i] = item(chatStore.items) ?? [];
+  if (!next) return -1;
+
+  chatStore.items[i!] = structuredClone(next);
+  chatStore.items = [...chatStore.items];
+  return i!;
 });
 
 export const useChatStore = () => useSnapshot(chatStore);
