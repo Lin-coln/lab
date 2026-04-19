@@ -58,6 +58,7 @@ export function createRuntime(onUpsert: (item: Item) => void) {
         ...(await ctx$item.resolveItems()), //
       ],
       tools: await ctx$tool.resolveTools(),
+      signal: new AbortController().signal,
     });
 
     const [iterable0, iterable1] = teeAsyncIterable(iterable);

@@ -4,23 +4,27 @@ export function createAdapter() {
   const host = "http://localhost:1234";
 
   return {
-    async createResponse(opts: { model: string; input: Item[]; tools?: Tool[] }) {
+    async createResponse(opts: { model: string; input: Item[]; tools?: Tool[]; signal: AbortSignal }) {
       const input = structuredClone(opts.input).map(revertItem);
-      const iterable = await responses({
-        stream: true,
-        model: opts.model,
-        input: input,
-        ...(opts.tools ? { tools: structuredClone(opts.tools) } : {}),
-      });
+      const iterable = await responses(
+        {
+          stream: true,
+          model: opts.model,
+          input: input,
+          ...(opts.tools ? { tools: structuredClone(opts.tools) } : {}),
+        },
+        opts.signal,
+      );
       return iterateStreamEvents(iterable);
     },
   };
 
-  async function responses(body: object) {
+  async function responses(body: object, signal?: AbortSignal) {
     const resp = await fetch(host + "/v1/responses", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body),
+      signal,
     });
 
     if (!resp.ok) {

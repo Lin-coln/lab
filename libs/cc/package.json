@@ -8,7 +8,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "cli": "bun run scripts/cli.ts"
+    "cli": "bun run scripts/cli/index.ts"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.82.0",

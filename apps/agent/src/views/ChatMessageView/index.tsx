@@ -10,7 +10,7 @@ export function ChatMessageView(props: { className?: ClassValue }) {
         if (item.type == "reasoning") {
           return <ReasoningItem key={i} item={item} />;
         } else if (item.type == "message") {
-          return <MessageItem item={item} />;
+          return <MessageItem key={i} item={item} />;
         } else if (item.type == "tool_call") {
           return <ToolCallItem key={i} item={item} />;
         }
