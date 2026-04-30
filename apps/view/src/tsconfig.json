@@ -2,7 +2,7 @@
   "extends": "utils/tsconfig.browser.json",
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*", "./*/index.ts"]
+      "@/*": ["./*"]
     }
   }
 }

@@ -3,13 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bun run scripts/build",
-    "dev": "bun run scripts/dev"
+    "build": "bun run scripts/build.ts",
+    "dev": "bun --hot run scripts/dev.ts"
   },
   "dependencies": {
     "clsx": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-router": "catalog:",
     "ui": "catalog:",
     "valtio": "catalog:"
   },

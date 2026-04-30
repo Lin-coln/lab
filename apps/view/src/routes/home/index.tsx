@@ -1,17 +1,9 @@
-import { Button } from "ui";
 import cx from "clsx";
-import { useRouter } from "utils/react";
+import { Button } from "ui";
+import { useNavigate } from "react-router";
 
-export default function App() {
-  const routeNode = useRouter({
-    mode: "history",
-    getRoute: (name: string) => ({ "/": Index })[name],
-  });
-
-  return routeNode;
-}
-
-function Index() {
+export function Component() {
+  const navigate = useNavigate();
   return (
     <div className={cx("flex flex-col justify-center items-center min-h-screen", "app-region-drag")}>
       <div className="max-w-120 mb-8">
@@ -19,9 +11,15 @@ function Index() {
         earum facere id ipsam magni nam natus nobis omnis optio qui quia quis similique soluta. Perferendis?
       </div>
       <Button
-        label={"button"}
+        label={"home"}
         onClick={() => {
-          console.log(123);
+          navigate("/");
+        }}
+      />
+      <Button
+        label={"/bar/joaidjfa"}
+        onClick={() => {
+          navigate("/bar/joaidjfa");
         }}
       />
     </div>

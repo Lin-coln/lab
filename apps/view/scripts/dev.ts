@@ -1,14 +1,11 @@
-import Renderer from "../src/index.html";
+import Pages from "../src/index.html";
 
 const server = Bun.serve({
   port: 3000,
+  development: { hmr: true, console: true },
   routes: {
-    "/*": Renderer,
-  },
-  development: {
-    hmr: true,
-    console: true,
+    "/*": Pages,
   },
 });
 
-console.log(`Listening on ${server.url.toString()}`);
+console.log(`listening ${server.url.toString()}`);
